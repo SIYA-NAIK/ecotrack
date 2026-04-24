@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/ecotrack/static/css/main.198f2bff.css",
+    "main.js": "/ecotrack/static/js/main.1950a23a.js",
+    "static/media/hero.png": "/ecotrack/static/media/hero.07e692695b6943978a5e.png",
+    "static/media/plant.jpg": "/ecotrack/static/media/plant.1f76d76c578d3a7e5215.jpg",
+    "static/media/bg.jpg": "/ecotrack/static/media/bg.d3153229ac25a93246d8.jpg",
+    "static/media/tracking.png": "/ecotrack/static/media/tracking.dfd852295b0414fa23e5.png",
+    "static/media/bg.png": "/ecotrack/static/media/bg.912c714fc7ed08ba6d9c.png",
+    "static/media/requestpickup.png": "/ecotrack/static/media/requestpickup.11350620cfe3e0c9d596.png",
+    "static/media/collection.png": "/ecotrack/static/media/collection.98942abcb0bd681e6013.png",
+    "static/media/alert.png": "/ecotrack/static/media/alert.2479b7d42b74d8210a2a.png",
+    "static/media/reportissue.png": "/ecotrack/static/media/reportissue.f46c1bf30f3d40e8295b.png",
+    "static/media/logo.png": "/ecotrack/static/media/logo.bb2f2e963cff7704292b.png",
+    "static/media/trackstatus.png": "/ecotrack/static/media/trackstatus.bba9c543cf1d46d76a41.png",
+    "index.html": "/ecotrack/index.html",
+    "main.198f2bff.css.map": "/ecotrack/static/css/main.198f2bff.css.map",
+    "main.1950a23a.js.map": "/ecotrack/static/js/main.1950a23a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.198f2bff.css",
+    "static/js/main.1950a23a.js"
+  ]
+}

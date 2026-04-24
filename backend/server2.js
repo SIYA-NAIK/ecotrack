@@ -8,14 +8,15 @@ app.use(cors());
 app.use(express.json());
 
 const ADMIN_BACKEND_URL =
-  process.env.ADMIN_BACKEND_URL || "http://localhost:5000";
+  process.env.ADMIN_BACKEND_URL || "https://ecotrack-mqko.onrender.com";
 
-const DB_CONFIG = {
-  host: process.env.DB_HOST || "localhost",
-  user: process.env.DB_USER || "root",
-  password: process.env.DB_PASS || "",
-  database: process.env.DB_NAME || "ecotrack",
-};
+const db = mysql.createConnection({
+  host: "metro.proxy.rlwy.net",
+  user: "root",
+  password: "nnvkwRxsbezBZPWlXvqFYnwjYnqKaqjB",
+  database: "railway",
+  port: 49010,
+});
 
 const DEFAULT_TRUCK_ID = process.env.DEFAULT_TRUCK_ID || "ECO-001";
 const DEFAULT_USER_ID = Number(process.env.DEFAULT_USER_ID || 19);

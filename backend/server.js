@@ -76,12 +76,12 @@ app.use("/uploads", express.static("uploads"));
    ✅ MYSQL CONNECTION (DB = ecotrack ✅)
 ======================= */
 const db = mysql.createConnection({
-  host: "localhost",
+  host: "metro.proxy.rlwy.net",
   user: "root",
-  password: "",
-  database: "ecotrack",
+  password: "nnvkwRxsbezBZPWlXvqFYnwjYnqKaqjB",
+  database: "railway",
+  port: 49010,
 });
-
 function ensurePickupRequestTrackingColumns() {
   db.query("SHOW COLUMNS FROM pickup_requests", (err, rows) => {
     if (err) {

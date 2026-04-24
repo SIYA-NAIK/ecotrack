@@ -14,7 +14,7 @@ import {
 } from "react-icons/fi";
 import "./adminpickuprequests.css";
 
-const API_ROOT = "http://localhost:5000";
+const API_ROOT = "https://ecotrack-mqko.onrender.com";
 const API = `${API_ROOT}/api`;
 
 const PAGE_SIZE = 8;

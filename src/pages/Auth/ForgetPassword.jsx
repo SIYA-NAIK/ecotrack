@@ -36,7 +36,7 @@ const ForgetPassword = () => {
       setError("");
       setMessage("");
 
-      const res = await fetch("http://localhost:5000/forgot-password", {
+     const res = await fetch("https://ecotrack-mqko.onrender.com/forgot-password",{
         method: "POST",
         headers: {
           "Content-Type": "application/json",

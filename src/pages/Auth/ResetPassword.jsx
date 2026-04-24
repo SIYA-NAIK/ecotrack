@@ -50,16 +50,19 @@ const ResetPassword = () => {
       setError("");
       setMessage("");
 
-      const res = await fetch("http://localhost:5000/reset-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          token,
-          password: password.trim(),
-        }),
-      });
+      const res = await fetch(
+  "https://ecotrack-mqko.onrender.com/reset-password",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token,
+      password: password.trim(),
+    }),
+  }
+);
 
       const data = await res.json();
 

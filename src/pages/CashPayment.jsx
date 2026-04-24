@@ -15,7 +15,7 @@ const referenceId = "ECO-" + Math.floor(1000 + Math.random() * 9000);
 const confirmPayment = async () => {
 try {
 
-await axios.post("http://localhost:5000/pay", {
+await axios.post("https://ecotrack-mqko.onrender.com/pay", {
 payment_type: "Cash",
 amount: total,
 reference_id: referenceId,

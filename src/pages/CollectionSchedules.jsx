@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FiPlus, FiEdit2, FiTrash2, FiX } from "react-icons/fi";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://ecotrack-mqko.onrender.com";
 
 const TYPES = ["Regular Collection", "Recycling", "Special Pickup"];
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];

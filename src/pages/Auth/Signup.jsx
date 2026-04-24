@@ -34,8 +34,8 @@ const [sendingOtp, setSendingOtp] = useState(false);
     const fetchAreas = async () => {
       try {
         setLoadingAreas(true);
-        const response = await fetch("http://localhost:5000/api/areas");
-        const data = await response.json();
+const response = await fetch("https://ecotrack-mqko.onrender.com/api/areas");
+const data = await response.json();
 
         if (response.ok) {
           setAreas(Array.isArray(data) ? data : []);

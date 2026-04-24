@@ -10,7 +10,7 @@ import { io } from "socket.io-client";
 import ResidentNavbar from "../components/ResidentNavbar";
 import "../styles/notifications.css";
 
-const API_BASE = "http://localhost:5000";
+const BACKEND_URL = "https://ecotrack-mqko.onrender.com";
 
 export default function NotificationsPage() {
   const stored = localStorage.getItem("user");

@@ -11,8 +11,7 @@ import {
 } from "react-icons/fi";
 import "./vehiclemanagement.css";
 
-const API = "http://localhost:5000/api";
-
+const API = "https://ecotrack-mqko.onrender.com/api";
 const initialForm = {
   vehicle_number: "",
   driver_name: "",
@@ -80,7 +79,7 @@ export default function VehicleManagement() {
 
   const fetchStaff = async () => {
     try {
-      const res = await fetch("http://localhost:5000/staff");
+      const res = await fetch("https://ecotrack-mqko.onrender.com/staff");
       const data = await res.json();
 
       const normalized = Array.isArray(data)

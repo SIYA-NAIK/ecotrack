@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 import "./todaypickupstatus.css";
 
-const API_BASE = "http://localhost:5000";
+const BACKEND_URL = "https://ecotrack-mqko.onrender.com";
 
 export default function TodayPickupStatus({ userId }) {
   const [tracking, setTracking] = useState(null);

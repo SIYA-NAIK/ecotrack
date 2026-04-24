@@ -4,7 +4,7 @@ import { FaBell, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { io } from "socket.io-client";
 import "../styles/dashboard.css";
 
-const API_BASE = "http://localhost:5000";
+const API = "https://ecotrack-mqko.onrender.com/api";
 
 function safeParseUser(rawUser) {
   if (!rawUser) return null;

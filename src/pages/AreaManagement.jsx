@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./areamanagement.css";
 
-const API = "http://localhost:5000/api";
-
+const API = "https://ecotrack-mqko.onrender.com/api";
 const initialForm = {
   area: "",
   pickup_time: "",

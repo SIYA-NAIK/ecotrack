@@ -12,7 +12,7 @@ import {
   CartesianGrid,
 } from "recharts";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://ecotrack-mqko.onrender.com";
 
 export default function Status() {
   const [summary, setSummary] = useState(null);

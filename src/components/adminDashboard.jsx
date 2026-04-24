@@ -21,7 +21,7 @@ import {
   FiZap,
 } from "react-icons/fi";
 
-const API = "http://localhost:5000/api";
+const API = "https://ecotrack-mqko.onrender.com/api";
 
 function chipStyle(tone) {
   const map = {

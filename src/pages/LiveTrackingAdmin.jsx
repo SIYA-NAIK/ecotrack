@@ -13,7 +13,8 @@ import "leaflet/dist/leaflet.css";
 import "../components/admindashboard.css";
 import "./livetrackingadmin.css";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://ecotrack-mqko.onrender.com";
+
 const CENTER_PONDA = [15.3991, 74.0124];
 
 const clamp = (n, a, b) => Math.max(a, Math.min(b, n));

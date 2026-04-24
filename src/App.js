@@ -19,7 +19,7 @@ import AttendancePage from "./pages/AttendancePage";
 import NotificationPage from "./pages/NotificationPage";
 import History from "./pages/History";
 import MyReports from "./pages/MyReports";
-import PickupPayment from "./pages/PickupPayment"; 
+import PickupPayment from "./pages/PickupPayment";
 import TrackingPage from "./pages/TrackingPage.jsx";
 import VehicleManagement from "./pages/VehicleManagement";
 import AdminUserManagement from "./pages/AdminUserManagement";
@@ -71,12 +71,15 @@ const App = () => {
   if (loading) return <SplashScreen />;
 
   return (
-    <Router>
+    <Router basename="/ecotrack">
       <ScrollToTop />
       <Routes>
+
         {/* AUTH */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/forgot-password" element={<ForgetPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
 
         {/* RESIDENT */}
         <Route element={<ProtectedRoute />}>
@@ -84,7 +87,6 @@ const App = () => {
           <Route path="/attendance" element={<AttendancePage />} />
           <Route path="/tracking" element={<TrackingPage />} />
           <Route path="/profile" element={<Profile />} />
-          
           <Route path="/schedule-pickup" element={<SchedulePickup />} />
           <Route path="/notifications" element={<NotificationPage />} />
           <Route path="/report-issue" element={<ReportIssue />} />
@@ -92,15 +94,14 @@ const App = () => {
           <Route path="/history" element={<History />} />
           <Route path="/pickup-payment" element={<PickupPayment />} />
         </Route>
-<Route path="/admin/vehicles" element={<VehicleManagement />} />
-<Route path="/admin/users" element={<AdminUserManagement />} />
-<Route path="/forgot-password" element={<ForgetPassword />} />
-<Route path="/reset-password/:token" element={<ResetPassword />} />
 
         {/* ADMIN */}
         <Route element={<AdminProtectedRoute />}>
           <Route path="/admin/*" element={<AdminLayout />} />
         </Route>
+
+        <Route path="/admin/vehicles" element={<VehicleManagement />} />
+        <Route path="/admin/users" element={<AdminUserManagement />} />
 
         {/* MAIN WEBSITE */}
         <Route

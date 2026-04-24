@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FiSearch, FiEdit2, FiTrash2, FiPlus, FiX } from "react-icons/fi";
 
-const BACKEND_URL = "http://localhost:5000";
-
+const BACKEND_URL = "https://ecotrack-mqko.onrender.com";
 const areasList = [
   "All Areas",
   "Kavlem",

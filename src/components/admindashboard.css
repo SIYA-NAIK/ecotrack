@@ -1,0 +1,389 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.admin {
+  min-height: 100vh;
+  background: #f6f8f7;
+  color: #0f172a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.contentArea {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 28px;
+  min-height: 100vh;
+}
+
+.pageTitle {
+  font-size: 24px;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0;
+}
+
+.pageSub {
+  margin-top: 6px;
+  color: #64748b;
+  font-size: 15px;
+}
+
+.loadingText {
+  font-weight: 800;
+  color: #64748b;
+}
+
+.adminHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.adminHeaderBtns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chipBtn {
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 14px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.chipBtn:hover {
+  background: #f8fafc;
+}
+
+.chipBtn.live {
+  background: rgba(16, 185, 129, 0.12);
+  color: #065f46;
+  border-color: rgba(16, 185, 129, 0.18);
+}
+
+.adminError {
+  margin-bottom: 14px;
+  color: #991b1b;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.stats5 {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.statCard {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 22px;
+  padding: 20px 22px;
+  min-height: 146px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.statTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.statLabel {
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.statIcon {
+  font-size: 24px;
+  color: #0f172a;
+  flex-shrink: 0;
+}
+
+.statMiddle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.statValue {
+  font-size: 28px;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1;
+  min-width: 70px;
+}
+
+.statSub {
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+  margin-bottom: 16px;
+}
+
+.gridRecent {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.cardBox {
+  background: #ffffff;
+  border-radius: 22px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.fleetHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.cardTitle {
+  font-size: 17px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.seeAllBtn {
+  border: none;
+  background: transparent;
+  color: #10b981;
+  font-weight: 900;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 10px;
+}
+
+.seeAllBtn:hover {
+  text-decoration: underline;
+}
+
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+}
+
+.tableContainer table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+.tableContainer thead th {
+  text-align: left;
+  padding: 16px 18px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #64748b;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  white-space: nowrap;
+}
+
+.tableContainer tbody td {
+  padding: 18px;
+  font-size: 15px;
+  color: #0f172a;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  vertical-align: middle;
+}
+
+.tableContainer tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.tableContainer tbody tr:hover td {
+  background: rgba(2, 6, 23, 0.025);
+}
+
+.strongCell {
+  font-weight: 900;
+}
+
+.emptyCell {
+  text-align: center;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.chartBox {
+  height: 360px;
+  margin-top: 8px;
+}
+
+.issueList {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.issueRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #ffffff;
+}
+
+.issueTitle {
+  font-weight: 900;
+  color: #0f172a;
+  font-size: 14px;
+}
+
+.issueMeta {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.staffList {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.staffRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(2, 6, 23, 0.02);
+}
+
+.staffName {
+  font-weight: 900;
+  color: #0f172a;
+  font-size: 14px;
+}
+
+.staffMeta {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.miniMuted {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 1280px) {
+  .stats5 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1100px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+
+  .gridRecent {
+    grid-template-columns: 1fr;
+  }
+
+  .stats5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .contentArea {
+    padding: 18px;
+  }
+
+  .adminHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .adminHeaderBtns {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .stats5 {
+    grid-template-columns: 1fr;
+  }
+
+  .fleetHeaderRow,
+  .cardTitleRow,
+  .issueRow,
+  .staffRow,
+  .statMiddle {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chartBox {
+    height: 300px;
+  }
+
+  .tableContainer tbody td,
+  .tableContainer thead th {
+    padding: 14px 12px;
+  }
+}

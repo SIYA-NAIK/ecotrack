@@ -1,0 +1,282 @@
+/* =====================================
+   HERO SECTION (FULL BRAND VERSION)
+===================================== */
+
+/* ===== Brand Colors (same as dashboard) ===== */
+:root {
+  --primary: #2f8f62;
+  --primary-dark: #23724d;
+  --primary-weak: rgba(47, 143, 98, 0.14);
+}
+
+/* =====================================
+   HERO SECTION
+===================================== */
+.hero-section {
+  min-height: 100vh;
+  padding: 120px 80px;
+  background: linear-gradient(135deg, rgba(47, 143, 98, 0.08), #ffffff);
+  display: flex;
+  align-items: center;
+}
+
+/* MAIN WRAPPER */
+.hero-wrapper {
+  max-width: 1400px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1.3fr;
+  align-items: center;
+  gap: 80px;
+}
+
+/* =====================================
+   LEFT SIDE
+===================================== */
+.hero-left {
+  animation: fadeUp 1s ease;
+}
+
+.hero-tag {
+  display: inline-block;
+  background: var(--primary-weak);
+  color: var(--primary);
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  border: 1px solid rgba(47, 143, 98, 0.25);
+}
+
+.hero-left h1 {
+  font-size: 64px;
+  line-height: 1.1;
+  margin-bottom: 25px;
+  color: #111;
+  font-weight: 800;
+}
+
+.hero-left h1 span {
+  color: var(--primary);
+}
+
+.hero-left p {
+  font-size: 19px;
+  color: #555;
+  max-width: 520px;
+  line-height: 1.6;
+}
+
+/* =====================================
+   BUTTONS (outline -> green on click)
+===================================== */
+.hero-buttons {
+  display: flex;
+  gap: 18px;
+  margin-top: 34px;
+  flex-wrap: wrap;
+}
+
+/* ✅ Both buttons look SAME (outline) by default */
+.btn-primary,
+.btn-secondary {
+  height: 48px;
+  padding: 0 26px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 750;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.92);
+  color: #0f172a;
+  border: 1.5px solid rgba(15, 23, 42, 0.14);
+
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  letter-spacing: -0.01em;
+
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.06);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  border-color: rgba(47, 143, 98, 0.35);
+  box-shadow: 0 12px 26px rgba(2, 6, 23, 0.08);
+}
+
+/* ✅ ACTIVE STATE -> GREEN (when clicked) */
+/* Add class "active" on the button in React */
+.btn-primary.active,
+.btn-secondary.active {
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 14px 30px rgba(47, 143, 98, 0.30);
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* Optional: icons inside buttons */
+.btn-primary svg,
+.btn-secondary svg {
+  font-size: 16px;
+}
+
+/* =====================================
+   STATS
+===================================== */
+.hero-stats {
+  display: flex;
+  gap: 50px;
+  margin-top: 60px;
+}
+
+.hero-stats h3 {
+  color: var(--primary);
+  font-size: 28px;
+  margin-bottom: 6px;
+  font-weight: 800;
+}
+
+.hero-stats p {
+  color: #555;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* =====================================
+   RIGHT IMAGE
+===================================== */
+.hero-right img {
+  width: 100%;
+  max-width: 720px;
+  animation: float 4s ease-in-out infinite;
+}
+
+/* =====================================
+   FORCE HERO BUTTON BEHAVIOR (OVERRIDE)
+   Default = outline (same as Report Issue)
+   Clicked (active) = green
+===================================== */
+
+/* ✅ Default: BOTH buttons look same (outline) */
+.hero-buttons .btn-primary,
+.hero-buttons .btn-secondary {
+  height: 48px;
+  padding: 0 26px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 750;
+  cursor: pointer;
+
+  background: #ffffff !important;              /* force remove green */
+  color: #0f172a !important;
+  border: 1.5px solid rgba(15, 23, 42, 0.14) !important;
+
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.06) !important;
+  transition: all 0.25s ease;
+}
+
+/* hover */
+.hero-buttons .btn-primary:hover,
+.hero-buttons .btn-secondary:hover {
+  transform: translateY(-2px);
+  border-color: rgba(47, 143, 98, 0.35) !important;
+  box-shadow: 0 12px 26px rgba(2, 6, 23, 0.08) !important;
+}
+
+/* ✅ Active: ONLY clicked button turns green */
+.hero-buttons .btn-primary.active,
+.hero-buttons .btn-secondary.active {
+  background: linear-gradient(90deg, #2f8f62, #23724d) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 14px 30px rgba(47, 143, 98, 0.30) !important;
+}
+
+/* press */
+.hero-buttons .btn-primary:active,
+.hero-buttons .btn-secondary:active {
+  transform: scale(0.98);
+}
+/* =====================================
+   ANIMATIONS
+===================================== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+@media (max-width: 1200px) {
+  .hero-wrapper {
+    gap: 50px;
+  }
+
+  .hero-left h1 {
+    font-size: 52px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-section {
+    padding: 100px 40px;
+  }
+
+  .hero-wrapper {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .hero-right img {
+    max-width: 520px;
+    margin: 40px auto 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-section {
+    padding: 90px 24px;
+  }
+
+  .hero-left h1 {
+    font-size: 42px;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 24px;
+  }
+}

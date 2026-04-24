@@ -1,0 +1,359 @@
+.trackingAdminPage {
+  display: grid;
+  gap: 18px;
+  color: #0f172a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.trackerToolbar {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.trackerField {
+  height: 44px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 14px;
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 700;
+  outline: none;
+}
+
+.trackerField:focus {
+  border-color: rgba(16, 185, 129, 0.42);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+}
+
+.trackerSearchField {
+  width: 260px;
+}
+
+.trackerSelectField {
+  min-width: 170px;
+}
+
+.trackerStatsGrid {
+  margin-bottom: 0;
+}
+
+.trackerAdminGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(320px, 380px);
+  gap: 16px;
+  align-items: start;
+}
+
+.trackerMapCard,
+.trackerSideCard {
+  padding: 20px;
+}
+
+.trackerMapShell {
+  position: relative;
+  overflow: hidden;
+  height: 680px;
+  margin-top: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #eff6f2, #f8fafc);
+}
+
+.trackerMapShell .leaflet-container {
+  height: 100%;
+  width: 100%;
+  background: #e8f2ed;
+}
+
+.trackerPopup {
+  min-width: 180px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.trackerPopupTitle {
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.trackerPopupMeta {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #334155;
+  line-height: 1.5;
+}
+
+.trackerEmptyState {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  max-width: 320px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.82);
+  color: #f8fafc;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+}
+
+.trackerCountPill {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.12);
+  color: #065f46;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.trackerSelectedCard {
+  margin-top: 14px;
+  margin-bottom: 14px;
+  padding: 16px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(255, 255, 255, 0.96));
+}
+
+.trackerSelectedHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.trackerSelectedTitle {
+  font-size: 18px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.trackerSelectedSubtitle {
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.trackerSelectedGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.trackerSelectedGrid div {
+  display: grid;
+  gap: 4px;
+}
+
+.trackerSelectedGrid span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.trackerSelectedGrid strong {
+  color: #0f172a;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.trackerVehicleList {
+  display: grid;
+  gap: 10px;
+  max-height: 504px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.trackerVehicleItem {
+  width: 100%;
+  text-align: left;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  background: #ffffff;
+  padding: 14px;
+  cursor: pointer;
+  transition: 0.16s ease;
+}
+
+.trackerVehicleItem:hover {
+  border-color: rgba(16, 185, 129, 0.28);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.trackerVehicleItem.active {
+  border-color: rgba(16, 185, 129, 0.45);
+  background: rgba(16, 185, 129, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.18);
+}
+
+.trackerVehicleHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.trackerVehicleTitle {
+  font-weight: 900;
+  color: #0f172a;
+  font-size: 15px;
+}
+
+.trackerVehicleSub {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.trackerVehicleMeta {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.trackerVehicleMeta span,
+.trackerVehicleFoot,
+.trackerStatusDot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.trackerVehicleMeta span {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.trackerVehicleFoot {
+  margin-top: 12px;
+  justify-content: space-between;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  gap: 12px;
+}
+
+.trackerStatusDotInner {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.trackerSpeedBar {
+  margin-top: 12px;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.08);
+}
+
+.trackerSpeedBarFill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.trackerHealthBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.trackerHealthBadge-live {
+  background: rgba(16, 185, 129, 0.14);
+  color: #065f46;
+}
+
+.trackerHealthBadge-idle {
+  background: rgba(245, 158, 11, 0.16);
+  color: #92400e;
+}
+
+.trackerHealthBadge-offline {
+  background: rgba(239, 68, 68, 0.14);
+  color: #991b1b;
+}
+
+.trackerEmptyPanel {
+  margin-top: 14px;
+  padding: 18px;
+  border: 1px dashed rgba(15, 23, 42, 0.14);
+  border-radius: 16px;
+  background: rgba(248, 250, 252, 0.9);
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 1220px) {
+  .trackerAdminGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .trackerVehicleList {
+    max-height: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .trackerSearchField,
+  .trackerSelectField {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .trackerToolbar {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .trackerToolbar > * {
+    flex: 1 1 180px;
+  }
+
+  .trackerMapShell {
+    height: 520px;
+  }
+}
+
+@media (max-width: 640px) {
+  .trackerSelectedGrid,
+  .trackerVehicleMeta {
+    grid-template-columns: 1fr;
+  }
+
+  .trackerVehicleFoot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .trackerMapShell {
+    height: 420px;
+  }
+}

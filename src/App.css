@@ -1,0 +1,332 @@
+/* =========================================
+   APP.CSS — GLOBAL THEME + RESET
+========================================= */
+
+/* =========================
+   RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   THEME VARIABLES
+========================= */
+:root {
+  --bg: #eaf7ef;
+  --bg-soft: #f4fbf7;
+  --card: #ffffff;
+  --card-2: #f8fcfa;
+
+  --text: #0f172a;
+  --text-soft: #334155;
+  --muted: #6b7280;
+
+  --border: rgba(15, 23, 42, 0.1);
+  --shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+  --shadow-soft: 0 8px 22px rgba(2, 6, 23, 0.06);
+
+  --green: #2f8f62;
+  --green-dark: #23724d;
+  --green-soft: rgba(47, 143, 98, 0.1);
+  --green-soft-2: rgba(47, 143, 98, 0.16);
+
+  --danger: #dc2626;
+  --warning: #b45309;
+  --success: #16a34a;
+}
+
+html[data-theme="dark"] {
+  --bg: #0b1220;
+  --bg-soft: #111827;
+  --card: #17212f;
+  --card-2: #1e293b;
+
+  --text: #f8fafc;
+  --text-soft: #cbd5e1;
+  --muted: #94a3b8;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  --shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.28);
+
+  --green: #43b07a;
+  --green-dark: #2f8f62;
+  --green-soft: rgba(67, 176, 122, 0.14);
+  --green-soft-2: rgba(67, 176, 122, 0.2);
+
+  --danger: #f87171;
+  --warning: #fbbf24;
+  --success: #4ade80;
+}
+
+/* =========================
+   HTML / BODY
+========================= */
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* =========================
+   ROOT
+========================= */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* =========================
+   APP ROOT
+========================= */
+.App {
+  width: 100%;
+  min-height: 100vh;
+  text-align: left;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* =========================
+   COMMON PAGE WRAPPERS
+========================= */
+.dash-layout,
+.dash-content,
+.dashboard-container,
+.attendance-hero,
+.history-page,
+.ri-page,
+.sp-page {
+  background: transparent;
+  color: inherit;
+}
+
+/* =========================
+   COMMON ELEMENTS
+========================= */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+input,
+select,
+textarea {
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* =========================
+   AUTOFILL FIX
+========================= */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: var(--text);
+  transition: background-color 9999s ease-in-out 0s;
+  box-shadow: 0 0 0px 1000px var(--card) inset;
+}
+
+/* =========================
+   TEXT SELECTION
+========================= */
+::selection {
+  background: var(--green-soft-2);
+  color: var(--text);
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-soft);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(47, 143, 98, 0.35);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(47, 143, 98, 0.5);
+}
+
+/* =========================
+   LINKS
+========================= */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================
+   MEDIA
+========================= */
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* =========================
+   UTILITY HELPERS
+========================= */
+.text-muted {
+  color: var(--muted);
+}
+
+.card-theme {
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  color: var(--text);
+}
+
+.soft-card-theme {
+  background: var(--card-2);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  color: var(--text);
+
+}
+
+/* =========================================
+   GLOBAL DARK MODE SUPPORT HELPERS
+========================================= */
+
+body,
+#root,
+.App {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Common cards / panels */
+.card,
+.page-header,
+.calendar-card,
+.quick-actions,
+.history-card,
+.tracking-card,
+.pickup-card,
+.modal,
+.right-panel > div,
+.table-wrap,
+.map-shell {
+  background: var(--card);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+/* Strong headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.page-title,
+.card-title,
+.stat-big {
+  color: var(--text);
+}
+
+/* Soft text */
+p,
+.page-subtitle,
+.breadcrumb,
+.hint,
+.text-soft,
+.text-muted,
+label,
+small {
+  color: var(--text-soft);
+}
+
+/* Inputs / selects / textarea */
+input,
+select,
+textarea {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Table support */
+table {
+  color: var(--text);
+}
+
+th {
+  color: var(--text-soft);
+}
+
+td {
+  color: var(--text);
+}
+
+/* Generic bordered pills/chips */
+.chip,
+.badge,
+.date-pill {
+  background: var(--card-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Light mode + dark mode safe secondary buttons */
+button.secondary,
+.action-btn.secondary,
+.ghost-btn {
+  background: var(--card-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Modal overlay */
+.overlay {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+html[data-theme="dark"] .overlay {
+  background: rgba(0, 0, 0, 0.6);
+}

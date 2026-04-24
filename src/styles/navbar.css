@@ -1,0 +1,184 @@
+/* =====================================
+   GLOBAL BRAND COLORS (MATCH DASHBOARD)
+===================================== */
+:root {
+  --primary: #2f8f62;
+  --primary-dark: #23724d;
+  --primary-weak: rgba(47, 143, 98, 0.14);
+
+  --bg-main: #ffffff;
+  --text-main: #0f172a;
+  --border: rgba(15, 23, 42, 0.10);
+}
+
+/* Dark mode variables */
+body.dark {
+  --bg-main: #0b1220;
+  --text-main: #e6edf6;
+  --border: rgba(226, 232, 240, 0.12);
+}
+
+/* =====================================
+   NAVBAR WRAPPER
+===================================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  height: 80px;
+  padding: 0 80px;
+
+  /* ✅ GREEN NAVBAR */
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.18);
+  transition: all 0.3s ease;
+}
+
+/* Prevent anchor overlap */
+body {
+  scroll-padding-top: 80px;
+}
+
+/* =====================================
+   LEFT (LOGO)
+===================================== */
+.nav-left {
+  cursor: pointer;
+}
+
+.nav-left h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+/* =====================================
+   CENTER (LINKS)
+===================================== */
+.nav-center {
+  list-style: none;
+  display: flex;
+  gap: 36px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-center li {
+  font-size: 15px;
+  font-weight: 650;
+  color: rgba(255, 255, 255, 0.88);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-center li:hover {
+  color: #ffffff;
+}
+
+/* Underline animation */
+.nav-center li::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #ffffff;
+  left: 0;
+  bottom: -6px;
+  transition: width 0.3s ease;
+}
+
+.nav-center li:hover::after {
+  width: 100%;
+}
+
+/* Active link */
+.nav-center li.active {
+  color: #ffffff;
+}
+
+.nav-center li.active::after {
+  width: 100%;
+}
+
+/* =====================================
+   RIGHT (ACTIONS)
+===================================== */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* DARK MODE TOGGLE BUTTON */
+.dark-toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  cursor: pointer;
+  font-size: 18px;
+  color: #ffffff;
+
+  transition: all 0.3s ease;
+}
+
+.dark-toggle:hover {
+  transform: rotate(12deg) scale(1.08);
+  background: rgba(255, 255, 255, 0.20);
+}
+
+/* =====================================
+   GET STARTED BUTTON
+===================================== */
+.get-started {
+  background: #ffffff;
+  color: var(--primary);
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: none;
+
+  font-size: 14px;
+  font-weight: 750;
+  cursor: pointer;
+
+  transition: all 0.35s ease;
+  box-shadow: 0 10px 25px rgba(2, 6, 23, 0.12);
+}
+
+.get-started:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .nav-center {
+    gap: 18px;
+  }
+
+  .nav-left h2 {
+    font-size: 20px;
+  }
+
+  .get-started {
+    padding: 10px 18px;
+  }
+}

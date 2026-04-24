@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* LIGHT */
+:root {
+  --bg-main: #ffffff;
+  --bg-soft: #f6fbf8;
+  --card-bg: #ffffff;
+  --text-main: #1e1e1e;
+  --text-muted: #6b6b6b;
+  --accent: #2bb673;
+  --border: #e5e5e5;
+}
+
+/* DARK */
+body.dark {
+  --bg-main: #0f1f1a;
+  --bg-soft: #122d26;
+  --card-bg: #162b24;
+  --text-main: #e9f5ef;
+  --text-muted: #9dbbb0;
+  --accent: #3fdc94;
+  --border: #24473c;
+}
+
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  transition: 0.4s;
+}
+

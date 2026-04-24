@@ -1,0 +1,941 @@
+/* =========================================
+   SCHEDULE PICKUP — ECO TRACK FINAL UPDATED CSS
+   Dark Mode + Smooth Theme Support
+========================================= */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.sp-page {
+  --green: #2f8f62;
+  --green-dark: #23724d;
+  --green-soft: rgba(47, 143, 98, 0.1);
+  --green-soft-2: rgba(47, 143, 98, 0.16);
+
+  --bg: #f1f8f5;
+  --card: #ffffff;
+  --card-2: #f8fafc;
+  --muted: #6b7280;
+  --text: #0f172a;
+  --text-soft: #334155;
+  --border: rgba(15, 23, 42, 0.1);
+
+  --shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+  --shadow-soft: 0 8px 22px rgba(2, 6, 23, 0.06);
+  --shadow-green: 0 14px 32px rgba(47, 143, 98, 0.18);
+
+  --radius: 18px;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    sans-serif;
+  overflow-x: hidden;
+}
+
+html[data-theme="dark"] .sp-page {
+  --green: #43b07a;
+  --green-dark: #2f8f62;
+  --green-soft: rgba(67, 176, 122, 0.12);
+  --green-soft-2: rgba(67, 176, 122, 0.18);
+
+  --bg: #0b1220;
+  --card: #0f1a2b;
+  --card-2: #0b1627;
+  --muted: #9aa8bd;
+  --text: #e6edf6;
+  --text-soft: #cbd5e1;
+  --border: rgba(226, 232, 240, 0.1);
+
+  --shadow: 0 18px 42px rgba(0, 0, 0, 0.42);
+  --shadow-soft: 0 10px 24px rgba(0, 0, 0, 0.28);
+  --shadow-green: 0 16px 34px rgba(67, 176, 122, 0.16);
+}
+
+/* ================= SMOOTH THEME TRANSITION ================= */
+.sp-page,
+.sp-hero,
+.sp-pill,
+.sp-title,
+.sp-subtitle,
+.sp-main,
+.sp-section-title,
+.sp-type-card,
+.sp-type-icon,
+.sp-type-label,
+.sp-type-fee,
+.sp-card,
+.sp-card-head h3,
+.sp-card-head-ic,
+.sp-field label,
+.sp-input input,
+.sp-input select,
+.sp-input textarea,
+.sp-primary,
+.sp-gps-btn,
+.sp-payment-card,
+.sp-payment-icon,
+.sp-fee-box,
+.sp-fee-title,
+.sp-fee-amount,
+.sp-fee-text,
+.sp-fee-status,
+.sp-alert,
+.sp-up-item,
+.sp-up-badge,
+.sp-up-title,
+.sp-up-sub,
+.sp-up-arrow,
+.sp-footer,
+.sp-mini-map-wrap,
+.sp-map-hint,
+.sp-coords {
+  transition:
+    background-color 0.32s ease,
+    color 0.32s ease,
+    border-color 0.32s ease,
+    box-shadow 0.32s ease,
+    opacity 0.32s ease,
+    transform 0.18s ease;
+}
+
+/* ================= HERO ================= */
+.sp-hero {
+  background: transparent;
+  color: var(--text);
+  padding: 34px 16px 24px;
+  text-align: center;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+
+.sp-hero-top {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.sp-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  background: var(--green-soft);
+  border: 1px solid rgba(47, 143, 98, 0.18);
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: var(--green-dark);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+html[data-theme="dark"] .sp-pill {
+  color: var(--green);
+  border-color: rgba(67, 176, 122, 0.28);
+}
+
+.sp-pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--green);
+  display: inline-block;
+}
+
+.sp-title {
+  margin: 10px 0 10px;
+  font-size: 34px;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  color: var(--text);
+}
+
+.sp-subtitle {
+  margin: 0 auto;
+  max-width: 720px;
+  font-size: 15px;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+/* ================= MAIN ================= */
+.sp-main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 24px 60px;
+  width: 100%;
+  background: transparent;
+}
+
+.sp-section-title {
+  margin: 22px 0 16px;
+  font-size: 17px;
+  font-weight: 800;
+  text-align: left;
+  color: var(--text);
+}
+
+/* ================= PICKUP TYPE GRID ================= */
+.sp-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+  margin-top: 8px;
+  margin-bottom: 26px;
+}
+
+.sp-type-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 26px 16px;
+  min-height: 150px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.sp-type-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(47, 143, 98, 0.3);
+  box-shadow: 0 12px 26px rgba(47, 143, 98, 0.1);
+}
+
+.sp-type-card.is-active {
+  border-color: var(--green);
+  background: linear-gradient(180deg, #f7fcf9 0%, #edf7f2 100%);
+  box-shadow: var(--shadow-green);
+  transform: translateY(-2px);
+}
+
+html[data-theme="dark"] .sp-type-card.is-active {
+  background: linear-gradient(180deg, #102033 0%, #0c1829 100%);
+}
+
+.sp-type-card.is-active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px rgba(47, 143, 98, 0.08);
+  pointer-events: none;
+}
+
+.sp-type-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: var(--green-soft);
+  color: var(--green-dark);
+  font-size: 22px;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+html[data-theme="dark"] .sp-type-icon {
+  color: var(--green);
+}
+
+.sp-type-card.is-active .sp-type-icon {
+  background: var(--green);
+  color: #ffffff;
+  transform: scale(1.06);
+  box-shadow: 0 10px 20px rgba(47, 143, 98, 0.22);
+}
+
+.sp-type-label {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+  text-align: center;
+  transition: color 0.18s ease;
+}
+
+.sp-type-card.is-active .sp-type-label {
+  color: var(--green-dark);
+}
+
+html[data-theme="dark"] .sp-type-card.is-active .sp-type-label {
+  color: var(--green);
+}
+
+.sp-type-fee {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 800;
+  text-align: center;
+}
+
+/* ================= LAYOUT ================= */
+.sp-one-col {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  margin-top: 14px;
+}
+
+.sp-two-col {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 26px;
+  align-items: start;
+  margin-top: 14px;
+}
+
+/* ================= CARDS ================= */
+.sp-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.sp-form-card,
+.sp-upcoming,
+.sp-upcoming-full {
+  width: 100%;
+  max-width: 100%;
+}
+
+.sp-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.sp-tracker-card {
+  overflow: hidden;
+}
+
+.sp-tracker-wrap {
+  min-height: 260px;
+}
+
+.sp-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.sp-card-head-ic {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: var(--green-soft);
+  color: var(--green-dark);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+html[data-theme="dark"] .sp-card-head-ic {
+  color: var(--green);
+}
+
+.sp-card-head h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+/* ================= FORM ================= */
+.sp-form {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.sp-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.sp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  width: 100%;
+  min-width: 0;
+}
+
+.sp-field label {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.sp-input {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.sp-input input,
+.sp-input select,
+.sp-input textarea {
+  width: 100%;
+  max-width: 100%;
+  min-height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 0 42px 0 14px;
+  outline: none;
+  background: var(--card);
+  font-size: 13px;
+  color: var(--text);
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+  font-family: inherit;
+}
+
+.sp-input textarea {
+  min-height: 120px;
+  resize: vertical;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.sp-input input:focus,
+.sp-input select:focus,
+.sp-input textarea:focus {
+  border-color: rgba(47, 143, 98, 0.45);
+  box-shadow: 0 0 0 3px rgba(47, 143, 98, 0.1);
+}
+
+.sp-input input::placeholder,
+.sp-input textarea::placeholder {
+  color: #9ca3af;
+}
+
+html[data-theme="dark"] .sp-input input::placeholder,
+html[data-theme="dark"] .sp-input textarea::placeholder {
+  color: #7d8ea6;
+}
+
+.sp-input-ic {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+html[data-theme="dark"] .sp-input-ic {
+  color: #7d8ea6;
+}
+
+.sp-input textarea + .sp-input-ic {
+  top: 18px;
+  transform: none;
+}
+
+/* ================= GPS BUTTON ================= */
+.sp-gps-btn {
+  width: 100%;
+  max-width: 100%;
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--green-soft);
+  color: var(--green-dark);
+  border: 1px solid rgba(47, 143, 98, 0.22);
+  font-weight: 900;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  transition:
+    background 0.12s ease,
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+html[data-theme="dark"] .sp-gps-btn {
+  color: var(--green);
+  border-color: rgba(67, 176, 122, 0.28);
+}
+
+.sp-gps-btn:hover {
+  background: var(--green-soft-2);
+}
+
+.sp-gps-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.sp-coords {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+/* ================= MAP ================= */
+.sp-mini-map-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card-2);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.sp-mini-map {
+  width: 100%;
+  max-width: 100%;
+  height: 230px;
+  min-height: 230px;
+  display: block;
+}
+
+.leaflet-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  border-radius: 16px;
+}
+
+.sp-map-hint {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.spMiniPin {
+  background: transparent;
+  border: 0;
+}
+
+.spMiniPinInner {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, var(--green) 0%, var(--green-dark) 100%);
+  color: #fff;
+  font-size: 16px;
+  box-shadow: 0 10px 18px rgba(47, 143, 98, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.95);
+}
+
+/* ================= ALERT ================= */
+.sp-alert {
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.sp-alert-warn {
+  color: #92400e;
+  background: #fff7ed;
+  border: 1px solid #fdba74;
+}
+
+html[data-theme="dark"] .sp-alert-warn {
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.28);
+}
+
+/* ================= PAYMENT ================= */
+.sp-payment-options {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.sp-payment-card {
+  flex: 1;
+  min-width: 180px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  background: var(--card);
+  transition: 0.2s ease;
+}
+
+.sp-payment-card input {
+  display: none;
+}
+
+.sp-payment-card.active {
+  border-color: var(--green);
+  background: var(--green-soft);
+  box-shadow: 0 0 0 2px rgba(47, 143, 98, 0.08);
+}
+
+.sp-payment-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green);
+  font-size: 16px;
+}
+
+/* ================= FEE BOX ================= */
+.sp-fee-box {
+  margin-top: 2px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbf9 100%);
+}
+
+html[data-theme="dark"] .sp-fee-box {
+  background: linear-gradient(180deg, #102033 0%, #0c1829 100%);
+}
+
+.sp-fee-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.sp-fee-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.sp-fee-amount {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.sp-fee-text {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--text-soft);
+}
+
+.sp-fee-status {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--text-soft);
+}
+
+.sp-status-confirmed {
+  color: #16a34a;
+}
+
+.sp-status-pending {
+  color: #b45309;
+}
+
+html[data-theme="dark"] .sp-status-pending {
+  color: #fbbf24;
+}
+
+/* ================= PRIMARY BUTTON ================= */
+.sp-primary {
+  width: 100%;
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 900;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  transition:
+    background 0.12s ease,
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.sp-primary:hover {
+  background: var(--green-dark);
+  box-shadow: 0 10px 20px rgba(47, 143, 98, 0.18);
+}
+
+.sp-primary:active {
+  transform: translateY(1px);
+}
+
+.sp-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.sp-btn-ic {
+  font-size: 14px;
+}
+
+/* ================= UPCOMING PICKUPS ================= */
+.sp-up-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sp-up-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--card-2);
+  transition: all 0.2s ease;
+}
+
+.sp-up-item:hover {
+  background: var(--green-soft);
+  border-color: rgba(47, 143, 98, 0.22);
+}
+
+.sp-up-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--green-soft);
+  color: var(--green);
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.sp-up-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.sp-up-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.sp-up-sub {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.sp-up-arrow {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.sp-empty-state {
+  padding: 12px 6px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* ================= FOOTER ================= */
+.sp-footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 14px;
+  line-height: 1.5;
+}
+
+.sp-mt-8 {
+  margin-top: 8px;
+}
+
+/* ================= DARK MODE CONTRAST FIX ================= */
+html[data-theme="dark"] body,
+html[data-theme="dark"] #root,
+html[data-theme="dark"] .App {
+  background: #0b1220 !important;
+}
+
+html[data-theme="dark"] .sp-main,
+html[data-theme="dark"] .sp-two-col,
+html[data-theme="dark"] .sp-one-col,
+html[data-theme="dark"] .sp-type-grid {
+  background: transparent !important;
+}
+
+html[data-theme="dark"] .sp-card,
+html[data-theme="dark"] .sp-type-card {
+  background: linear-gradient(180deg, #0b1627 0%, #0a1423 100%) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--shadow) !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+html[data-theme="dark"] .sp-title,
+html[data-theme="dark"] .sp-section-title,
+html[data-theme="dark"] .sp-card-head h3,
+html[data-theme="dark"] .sp-field label,
+html[data-theme="dark"] .sp-type-label,
+html[data-theme="dark"] .sp-fee-title,
+html[data-theme="dark"] .sp-fee-amount,
+html[data-theme="dark"] .sp-up-title {
+  color: var(--text) !important;
+}
+
+html[data-theme="dark"] .sp-subtitle,
+html[data-theme="dark"] .sp-type-fee,
+html[data-theme="dark"] .sp-footer,
+html[data-theme="dark"] .sp-coords,
+html[data-theme="dark"] .sp-fee-text,
+html[data-theme="dark"] .sp-fee-status,
+html[data-theme="dark"] .sp-map-hint,
+html[data-theme="dark"] .sp-up-sub,
+html[data-theme="dark"] .sp-up-arrow,
+html[data-theme="dark"] .sp-empty-state {
+  color: var(--muted) !important;
+}
+
+html[data-theme="dark"] .sp-input input,
+html[data-theme="dark"] .sp-input select,
+html[data-theme="dark"] .sp-input textarea,
+html[data-theme="dark"] .sp-payment-card,
+html[data-theme="dark"] .sp-mini-map-wrap {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+html[data-theme="dark"] .sp-gps-btn {
+  background: rgba(67, 176, 122, 0.12) !important;
+  color: var(--green) !important;
+  border-color: rgba(67, 176, 122, 0.28) !important;
+}
+
+html[data-theme="dark"] .sp-primary {
+  color: #ffffff !important;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1100px) {
+  .sp-main {
+    max-width: 980px;
+  }
+
+  .sp-type-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .sp-two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-title {
+    font-size: 28px;
+  }
+
+  .sp-mini-map {
+    height: 210px;
+    min-height: 210px;
+  }
+
+  .sp-payment-card {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .sp-main {
+    padding: 20px 14px 50px;
+  }
+
+  .sp-title {
+    font-size: 28px;
+  }
+
+  .sp-subtitle {
+    font-size: 14px;
+  }
+
+  .sp-type-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .sp-type-card {
+    min-height: 120px;
+    padding: 20px 14px;
+  }
+
+  .sp-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .sp-coords {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .sp-mini-map {
+    height: 190px;
+    min-height: 190px;
+  }
+}

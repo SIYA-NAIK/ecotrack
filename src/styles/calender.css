@@ -1,0 +1,653 @@
+/* =============================
+   EcoTrack Attendance Page + Calendar
+   Dark Mode + Smooth Theme Support
+============================= */
+
+:root {
+  --brand: #2f8f62;
+  --brand-dark: #23724d;
+  --brand-weak: rgba(47, 143, 98, 0.12);
+
+  --danger: #e63946;
+  --danger-weak: rgba(230, 57, 70, 0.14);
+
+  --card: #ffffff;
+  --card-2: #f8fafc;
+  --bg: #edf7f2;
+  --text: #0f172a;
+  --text-soft: #334155;
+  --muted: #64748b;
+  --border: rgba(15, 23, 42, 0.08);
+  --shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+  --shadow-soft: 0 8px 20px rgba(2, 6, 23, 0.05);
+  --radius: 16px;
+}
+
+html[data-theme="dark"] {
+  --brand: #43b07a;
+  --brand-dark: #2f8f62;
+  --brand-weak: rgba(67, 176, 122, 0.16);
+
+  --danger: #ff7b7b;
+  --danger-weak: rgba(255, 123, 123, 0.16);
+
+  --card: #0f1a2b;
+  --card-2: #0b1627;
+  --bg: #0b1220;
+  --text: #e6edf6;
+  --text-soft: #cbd5e1;
+  --muted: #9aa8bd;
+  --border: rgba(226, 232, 240, 0.1);
+  --shadow: 0 18px 42px rgba(0, 0, 0, 0.42);
+  --shadow-soft: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+/* =============================
+   SMOOTH THEME TRANSITION
+============================= */
+.attendance-hero,
+.attendance-pill,
+.dashboard-container,
+.calendar-card,
+.calendar-top button,
+.weekdays,
+.day,
+.right-panel,
+.card,
+.impact-card,
+.overlay,
+.modal,
+.popup-buttons button,
+.modal > button,
+.calendar-note,
+h1,
+h2,
+h3,
+p,
+span,
+strong {
+  transition:
+    background-color 0.32s ease,
+    color 0.32s ease,
+    border-color 0.32s ease,
+    box-shadow 0.32s ease,
+    opacity 0.32s ease,
+    transform 0.2s ease;
+}
+
+/* =============================
+   ATTENDANCE HERO
+============================= */
+.attendance-hero {
+  text-align: center;
+  padding: 15px 15px 15px;
+  border-bottom: 2px solid rgba(1, 5, 12, 0.06);
+  background: transparent;
+}
+
+html[data-theme="dark"] .attendance-hero {
+  border-bottom: 2px solid rgba(226, 232, 240, 0.08);
+}
+
+.attendance-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  background: var(--brand-weak);
+  border: 1px solid rgba(47, 143, 98, 0.22);
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: var(--brand-dark);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+html[data-theme="dark"] .attendance-pill {
+  color: var(--brand);
+  border-color: rgba(67, 176, 122, 0.28);
+}
+
+.pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+.attendance-hero h1 {
+  margin: 6px 0 6px;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  color: var(--text);
+}
+
+.attendance-hero p {
+  margin: 10px auto 0;
+  max-width: 720px;
+  color: var(--text-soft);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* =============================
+   MAIN LAYOUT
+============================= */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 26px auto 60px;
+  padding: 0 16px;
+  background: transparent;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.calendar-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-section h2 {
+  display: none;
+}
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-self: start;
+}
+
+/* =============================
+   OPTIONAL NOTE / MSG
+============================= */
+.calendar-note {
+  margin-bottom: 12px;
+  color: var(--text-soft);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* =============================
+   CALENDAR CARD
+============================= */
+.calendar-card {
+  background: var(--card);
+  padding: 30px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease;
+  animation: fadeInMonth 0.22s ease;
+}
+
+.calendar-card:hover {
+  transform: translateY(-2px);
+}
+
+/* =============================
+   HEADER (MONTH NAV)
+============================= */
+.calendar-top {
+  display: grid;
+  grid-template-columns: 60px 1fr 60px;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.calendar-top h3 {
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  margin: 0;
+  color: var(--text);
+}
+
+.calendar-top button {
+  height: 38px;
+  width: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.18s ease;
+  font-weight: 900;
+}
+
+.calendar-top button:hover {
+  background: var(--brand-weak);
+  border-color: rgba(47, 143, 98, 0.3);
+  color: var(--brand);
+}
+
+/* =============================
+   WEEKDAYS
+============================= */
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 12px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--muted);
+  letter-spacing: 0.6px;
+}
+
+.weekdays span {
+  text-align: left;
+}
+
+/* =============================
+   DAYS GRID
+============================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 14px;
+}
+
+.day {
+  background: var(--card-2);
+  height: 78px;
+  border-radius: 14px;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-weight: 800;
+  color: var(--text);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  position: relative;
+  border: 1px solid var(--border);
+}
+
+.day:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* =============================
+   STATUS COLORS
+============================= */
+.green {
+  background: var(--brand-weak);
+  border: 2px solid var(--brand);
+  color: var(--text);
+}
+
+.red {
+  background: var(--danger-weak);
+  border: 2px solid var(--danger);
+  color: var(--text);
+}
+
+.future {
+  background: rgba(148, 163, 184, 0.12) !important;
+  color: rgba(148, 163, 184, 0.7);
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+html[data-theme="dark"] .future {
+  background: rgba(148, 163, 184, 0.08) !important;
+  color: rgba(154, 168, 189, 0.65);
+}
+
+.locked {
+  cursor: default;
+}
+
+/* =============================
+   TODAY HIGHLIGHT
+============================= */
+.day.today {
+  border: 2px solid var(--brand);
+  box-shadow: 0 0 0 4px rgba(47, 143, 98, 0.12);
+}
+
+html[data-theme="dark"] .day.today {
+  box-shadow: 0 0 0 4px rgba(67, 176, 122, 0.16);
+}
+
+.today-dot {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--brand);
+  border-radius: 50%;
+}
+
+/* =============================
+   AUTO MARK ANIMATION
+============================= */
+.auto-mark-pulse {
+  animation: autoMarkPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes autoMarkPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(47, 143, 98, 0.32);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 8px rgba(47, 143, 98, 0.08);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(47, 143, 98, 0);
+  }
+}
+
+html[data-theme="dark"] .auto-mark-pulse {
+  animation: autoMarkPulseDark 1.4s ease-in-out infinite;
+}
+
+@keyframes autoMarkPulseDark {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(67, 176, 122, 0.3);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 8px rgba(67, 176, 122, 0.1);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(67, 176, 122, 0);
+  }
+}
+
+/* =============================
+   RIGHT PANEL CARDS
+============================= */
+.card {
+  background: var(--card);
+  padding: 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  color: var(--text);
+}
+
+.card h3,
+.card h2,
+.card strong {
+  color: var(--text);
+}
+
+.card p,
+.card span,
+.card li {
+  color: var(--text-soft);
+}
+
+/* Eco Impact Card */
+.impact-card {
+  background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+  color: #fff;
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.impact-card h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.impact-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.impact-stats p {
+  margin: 0;
+  font-size: 11px;
+  opacity: 0.92;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.impact-stats h2 {
+  margin: 6px 0 0 0;
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+}
+
+/* =============================
+   MODAL (POPUP)
+============================= */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+html[data-theme="dark"] .overlay {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.modal {
+  background: var(--card);
+  padding: 28px;
+  border-radius: var(--radius);
+  width: 320px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.modal h3 {
+  color: var(--text);
+}
+
+.modal p {
+  color: var(--text-soft);
+  line-height: 1.45;
+}
+
+.popup-buttons {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.popup-buttons button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+/* First button */
+.popup-buttons button:first-child {
+  background: var(--brand);
+  color: white;
+}
+
+.popup-buttons button:first-child:hover {
+  background: var(--brand-dark);
+}
+
+/* Last button */
+.popup-buttons button:last-child {
+  background: var(--danger);
+  color: white;
+}
+
+.popup-buttons button:last-child:hover {
+  filter: brightness(0.96);
+}
+
+/* Custom buttons from JSX */
+.danger-btn {
+  background: var(--danger) !important;
+  color: #fff !important;
+}
+
+.secondary-btn {
+  background: var(--card-2) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.secondary-btn:hover {
+  background: var(--brand-weak) !important;
+  color: var(--brand) !important;
+}
+
+/* Cancel button */
+.modal > button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.modal > button:hover {
+  background: var(--card-2);
+}
+
+/* =============================
+   STATUS LEGEND / SIDE TEXT
+============================= */
+.legend-item,
+.recent-activity-item,
+.monthly-impact-item {
+  color: var(--text-soft);
+}
+
+.legend-item strong,
+.recent-activity-item strong,
+.monthly-impact-item strong {
+  color: var(--text);
+}
+
+/* =============================
+   SMOOTH MONTH TRANSITION
+============================= */
+@keyframes fadeInMonth {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =============================
+   DARK MODE CONTRAST FIX
+============================= */
+html[data-theme="dark"] body,
+html[data-theme="dark"] #root,
+html[data-theme="dark"] .App {
+  background: var(--bg) !important;
+}
+
+html[data-theme="dark"] .dashboard-container,
+html[data-theme="dark"] .calendar-section,
+html[data-theme="dark"] .right-panel {
+  background: transparent !important;
+}
+
+html[data-theme="dark"] .calendar-card,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .modal {
+  background: linear-gradient(180deg, #0b1627 0%, #0a1423 100%) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--shadow) !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+html[data-theme="dark"] .attendance-hero h1,
+html[data-theme="dark"] .calendar-top h3,
+html[data-theme="dark"] .card h3,
+html[data-theme="dark"] .card h2,
+html[data-theme="dark"] .day,
+html[data-theme="dark"] .modal h3 {
+  color: var(--text) !important;
+}
+
+html[data-theme="dark"] .attendance-hero p,
+html[data-theme="dark"] .weekdays,
+html[data-theme="dark"] .calendar-note,
+html[data-theme="dark"] .modal p,
+html[data-theme="dark"] .card p,
+html[data-theme="dark"] .card span {
+  color: var(--muted) !important;
+}
+
+html[data-theme="dark"] .calendar-top button,
+html[data-theme="dark"] .modal > button {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+html[data-theme="dark"] .calendar-top button:hover,
+html[data-theme="dark"] .modal > button:hover {
+  background: var(--brand-weak) !important;
+  color: var(--brand) !important;
+}
+
+html[data-theme="dark"] .day {
+  background: var(--card-2) !important;
+  border-color: var(--border) !important;
+}
+
+html[data-theme="dark"] .green {
+  background: var(--brand-weak) !important;
+  border-color: var(--brand) !important;
+}
+
+html[data-theme="dark"] .red {
+  background: var(--danger-weak) !important;
+  border-color: var(--danger) !important;
+}
+
+/* =============================
+   RESPONSIVE
+============================= */
+@media (max-width: 950px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .right-panel {
+    width: 100%;
+  }
+
+  .attendance-hero h1 {
+    font-size: 28px;
+  }
+}

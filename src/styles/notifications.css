@@ -1,0 +1,420 @@
+/* =========================================
+   NOTIFICATION PAGE — DARK MODE + SMOOTH THEME SUPPORT
+========================================= */
+
+:root {
+  --brand: #2f8f62;
+  --brand-dark: #23724d;
+  --brand-weak: rgba(47, 143, 98, 0.12);
+
+  --danger: #e63946;
+  --danger-weak: rgba(230, 57, 70, 0.14);
+
+  --warn: #f59e0b;
+  --warn-weak: rgba(245, 158, 11, 0.14);
+
+  --info: #3b82f6;
+  --info-weak: rgba(59, 130, 246, 0.14);
+
+  --bg: #f1f8f5;
+  --card: #ffffff;
+  --card-2: #f8fbfa;
+  --text: #0f172a;
+  --text-soft: #334155;
+  --muted: #64748b;
+  --border: rgba(15, 23, 42, 0.08);
+  --shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+  --shadow-soft: 0 8px 22px rgba(2, 6, 23, 0.06);
+  --radius: 16px;
+}
+
+html[data-theme="dark"] {
+  --brand: #43b07a;
+  --brand-dark: #2f8f62;
+  --brand-weak: rgba(67, 176, 122, 0.16);
+
+  --danger: #ff7b7b;
+  --danger-weak: rgba(255, 123, 123, 0.16);
+
+  --warn: #fbbf24;
+  --warn-weak: rgba(245, 158, 11, 0.12);
+
+  --info: #60a5fa;
+  --info-weak: rgba(96, 165, 250, 0.14);
+
+  --bg: #0b1220;
+  --card: #0f1a2b;
+  --card-2: #0b1627;
+  --text: #e6edf6;
+  --text-soft: #cbd5e1;
+  --muted: #9aa8bd;
+  --border: rgba(226, 232, 240, 0.1);
+  --shadow: 0 18px 42px rgba(0, 0, 0, 0.42);
+  --shadow-soft: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+/* ================= SMOOTH THEME TRANSITION ================= */
+.notif-hero,
+.notif-pill,
+.notif-hero h1,
+.notif-hero p,
+.notif-wrap,
+.notif-head,
+.notif-title,
+.notif-sub,
+.notif-badge,
+.ghost-btn,
+.notif-list,
+.card,
+.notif-item,
+.notif-item-title,
+.notif-time,
+.notif-body,
+.notif-empty,
+.notif-empty h3,
+.notif-empty p,
+.notif-msg,
+.notif-toast {
+  transition:
+    background-color 0.32s ease,
+    color 0.32s ease,
+    border-color 0.32s ease,
+    box-shadow 0.32s ease,
+    opacity 0.32s ease,
+    transform 0.18s ease;
+}
+
+/* ================= HERO ================= */
+.notif-hero {
+  text-align: center;
+  padding: 40px 20px 25px;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+}
+
+.notif-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  background: var(--brand-weak);
+  border: 1px solid rgba(47, 143, 98, 0.25);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: var(--brand-dark);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+html[data-theme="dark"] .notif-pill {
+  color: var(--brand);
+  border-color: rgba(67, 176, 122, 0.28);
+}
+
+.pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+.notif-hero h1 {
+  font-size: 36px;
+  font-weight: 900;
+  margin: 0;
+  color: var(--text);
+}
+
+.notif-hero p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* ================= PAGE WRAP ================= */
+.notif-wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 22px 16px 40px;
+  background: transparent;
+}
+
+/* ================= HEADER ================= */
+.notif-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.notif-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.notif-sub {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.notif-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.notif-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  background: var(--brand-weak);
+  color: var(--brand);
+  border: 1px solid rgba(47, 143, 98, 0.25);
+}
+
+/* ================= BUTTONS ================= */
+.ghost-btn {
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 750;
+  transition: 0.18s ease;
+}
+
+.ghost-btn:hover {
+  transform: translateY(-1px);
+  background: var(--brand-weak);
+  color: var(--brand);
+}
+
+.ghost-btn.danger:hover {
+  background: var(--danger-weak);
+  border-color: rgba(230, 57, 70, 0.25);
+  color: var(--danger);
+}
+
+html[data-theme="dark"] .ghost-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+/* ================= LIST ================= */
+.notif-list {
+  display: grid;
+  gap: 12px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* ================= ITEM ================= */
+.notif-item {
+  text-align: left;
+  padding: 16px;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.notif-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.notif-item.unread {
+  border-left: 6px solid var(--brand);
+}
+
+.notif-item.read {
+  opacity: 0.92;
+}
+
+.notif-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+
+.notif-item-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.dot-live {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+.notif-time {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.notif-body {
+  margin-top: 10px;
+  color: var(--text-soft);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* ================= TYPE COLORS ================= */
+.notif-item.success.unread {
+  border-left-color: var(--brand);
+}
+
+.notif-item.warning.unread {
+  border-left-color: var(--warn);
+}
+
+.notif-item.info.unread {
+  border-left-color: var(--info);
+}
+
+/* ================= EMPTY ================= */
+.notif-empty {
+  padding: 24px;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.notif-empty h3 {
+  margin: 0;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.notif-empty p {
+  margin-top: 8px;
+  color: var(--muted);
+}
+
+/* ================= MSG ================= */
+.notif-msg {
+  margin: 10px 0 14px;
+  color: var(--muted);
+  font-weight: 650;
+}
+
+/* ================= TOAST ================= */
+.notif-toast {
+  position: fixed;
+  top: 90px;
+  right: 30px;
+  background: var(--brand);
+  color: white;
+  padding: 16px 22px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  animation: slideIn 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.notif-toast strong {
+  display: block;
+  font-size: 15px;
+}
+
+.notif-toast p {
+  font-size: 13px;
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* ================= DARK MODE CONTRAST FIX ================= */
+html[data-theme="dark"] body,
+html[data-theme="dark"] #root,
+html[data-theme="dark"] .App {
+  background: #0b1220 !important;
+}
+
+html[data-theme="dark"] .notif-wrap,
+html[data-theme="dark"] .notif-head,
+html[data-theme="dark"] .notif-list {
+  background: transparent !important;
+}
+
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .notif-empty {
+  background: linear-gradient(180deg, #0b1627 0%, #0a1423 100%) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--shadow) !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+html[data-theme="dark"] .notif-title,
+html[data-theme="dark"] .notif-item-title,
+html[data-theme="dark"] .notif-empty h3,
+html[data-theme="dark"] .notif-hero h1 {
+  color: var(--text) !important;
+}
+
+html[data-theme="dark"] .notif-sub,
+html[data-theme="dark"] .notif-time,
+html[data-theme="dark"] .notif-body,
+html[data-theme="dark"] .notif-empty p,
+html[data-theme="dark"] .notif-msg,
+html[data-theme="dark"] .notif-hero p {
+  color: var(--muted) !important;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 700px) {
+  .notif-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .notif-hero h1 {
+    font-size: 28px;
+  }
+
+  .notif-wrap {
+    padding: 20px 14px 32px;
+  }
+
+  .notif-toast {
+    right: 14px;
+    left: 14px;
+    top: 84px;
+  }
+}
+
+/* ================= TOAST ANIMATION ================= */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

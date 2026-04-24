@@ -1,0 +1,141 @@
+.how-section {
+  padding: 120px 90px;
+  background: var(--bg-main);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.how-section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* HEADER */
+.how-header {
+  max-width: 820px;
+  margin: auto;
+  text-align: center;
+}
+
+.how-pill {
+  display: inline-block;
+  padding: 6px 18px;
+  background: rgba(43, 182, 115, 0.15);
+  color: var(--accent);
+  border-radius: 30px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.how-header h2 {
+  font-size: 46px;
+  margin-bottom: 18px;
+  letter-spacing: -0.5px;
+}
+
+.how-header h2 span {
+  color: var(--accent);
+}
+
+.how-header p {
+  font-size: 17px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* STEPS WRAPPER */
+.how-steps {
+  margin-top: 90px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  position: relative;
+}
+
+/* CONNECTING LINE */
+.how-steps::before {
+  content: "";
+  position: absolute;
+  top: 42px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--accent),
+    transparent
+  );
+}
+
+/* CARD */
+.how-card {
+  background: var(--card-bg);
+  padding: 40px 32px;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.how-card:hover {
+  transform: translateY(-8px);
+}
+
+/* STEP NUMBER */
+.step-number {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ICON PLACEHOLDER */
+/* ICON CONTAINER */
+.step-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  background: rgba(43, 182, 115, 0.12);
+  margin: 30px auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* INNER GREEN BOX */
+.step-icon-inner {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+}
+
+
+/* TEXT */
+.how-card h4 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.how-card p {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}

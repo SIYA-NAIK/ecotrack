@@ -1673,10 +1673,10 @@ app.post("/driver/update", (req, res) => {
       .json({ ok: false, message: "truck_id, lat, lng required" });
   }
 
-  const q = `UPDATE vehicles SET lat=?, lng=?, speed=? WHERE vehicle_number=?`;
-  db.query(
-    q,
-    [Number(lat), Number(lng), Number(speed ?? 0), String(truck_id)],
+ const q = `UPDATE vehicles SET lat=?, lng=? WHERE vehicle_number=?`;
+db.query(
+  q,
+  [Number(lat), Number(lng), String(truck_id)],
     (err, result) => {
       if (err) return res.status(500).json({ ok: false, message: err.message });
       if (result.affectedRows === 0)

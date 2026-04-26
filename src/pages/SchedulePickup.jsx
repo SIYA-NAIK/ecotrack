@@ -122,7 +122,6 @@ export default function SchedulePickup() {
       { label: "Chair", fee: 300 },
       { label: "Cupboard", fee: 1000 },
       { label: "Large Box", fee: 400 },
-      { label: "Other" },
     ],
     []
   );

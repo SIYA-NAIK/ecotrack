@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 /* COMPONENTS */
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
@@ -71,7 +70,7 @@ const App = () => {
   if (loading) return <SplashScreen />;
 
   return (
-    <Router basename="/ecotrack">
+    <Router >
       <ScrollToTop />
       <Routes>
 

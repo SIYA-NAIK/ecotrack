@@ -23,7 +23,8 @@ import {
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-const BACKEND_URL = "https://ecotrack-mqko.onrender.com";
+const API_BASE = "https://ecotrack-mqko.onrender.com";
+const API = `${API_BASE}/api`;
 const DEFAULT_MAP_CENTER = [15.3991, 74.0124];
 
 const reportLocationIcon = new L.DivIcon({

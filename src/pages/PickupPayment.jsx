@@ -10,7 +10,8 @@ import {
 import ResidentNavbar from "../components/ResidentNavbar";
 import "./pickuppayment.css";
 
-const BACKEND_URL = "https://ecotrack-mqko.onrender.com";
+const API_BASE = "https://ecotrack-mqko.onrender.com";
+const API = `${API_BASE}/api`;
 
 const PICKUP_FEES = {
   "Bulky Items": 500,

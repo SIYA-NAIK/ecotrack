@@ -18,7 +18,8 @@ import { useResidentData } from "../context/ResidentDataContext";
 
 import "../styles/styles.css";
 
-const API = "https://ecotrack-mqko.onrender.com/api";
+const API_BASE = "https://ecotrack-mqko.onrender.com";
+const API = `${API_BASE}/api`;
 const DEFAULT_TRUCK_ID = "ECO-001";
 const REFRESH_MS = 3000;
 

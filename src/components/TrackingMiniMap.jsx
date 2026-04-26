@@ -15,7 +15,8 @@ import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import { useResidentData } from "../context/ResidentDataContext";
-const API = "https://ecotrack-mqko.onrender.com/api";
+const API_BASE = "https://ecotrack-mqko.onrender.com";
+const API = `${API_BASE}/api`;
 const REFRESH_MS = 3000;
 
 delete L.Icon.Default.prototype._getIconUrl;

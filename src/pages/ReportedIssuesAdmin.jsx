@@ -13,7 +13,8 @@ import {
 } from "react-icons/fi";
 import "./reportedissuesadmin.css";
 
-const BACKEND_URL = "https://ecotrack-mqko.onrender.com";
+const API_BASE = "https://ecotrack-mqko.onrender.com";
+const API = `${API_BASE}/api`;
 const PAGE_SIZE = 8;
 
 function normalizeStatus(issue) {

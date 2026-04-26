@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./auth.css";
 import plant from "../../assets/auth/plant.jpg";
 
-
+const API_BASE = "https://ecotrack-mqko.onrender.com";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -31,28 +31,31 @@ const [sendingOtp, setSendingOtp] = useState(false);
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    const fetchAreas = async () => {
-      try {
-        setLoadingAreas(true);
-const response = await fetch("https://ecotrack-mqko.onrender.com/api/areas");
-const data = await response.json();
+  const fetchAreas = async () => {
+    try {
+      setLoadingAreas(true);
 
-        if (response.ok) {
-          setAreas(Array.isArray(data) ? data : []);
-        } else {
-          console.error("Failed to fetch areas:", data.message);
-          setAreas([]);
-        }
-      } catch (err) {
-        console.error("Failed to fetch areas:", err);
+      const response = await fetch(`${API_BASE}/api/areas`);
+      const data = await response.json();
+
+      if (response.ok) {
+        setAreas(data || []);
+      } else {
         setAreas([]);
-      } finally {
-        setLoadingAreas(false);
       }
-    };
+    } catch (err) {
+      console.error(err);
+      setAreas([]);
+    } finally {
+      setLoadingAreas(false);
+    }
+  };
+fetchAreas();
 
-    fetchAreas();
-  }, []);
+  // 🔥 RETRY (IMPORTANT for Render sleep)
+  setTimeout(fetchAreas, 3000);
+
+}, []);
 
   const validateField = (name, value, allValues) => {
     const currentValues = allValues || formData;
@@ -232,7 +235,7 @@ const data = await response.json();
     try {
       setSubmitting(true);
 
-      const response = await fetch("http://localhost:5000/signup", {
+      const response = await fetch("https://ecotrack-mqko.onrender.com/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

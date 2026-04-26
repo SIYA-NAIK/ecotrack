@@ -4,7 +4,8 @@ import ResidentNavbar from "../components/ResidentNavbar";
 import { FaHistory, FaFilter, FaInbox } from "react-icons/fa";
 import "../styles/history.css";
 
-const BACKEND_URL = "https://ecotrack-mqko.onrender.com";
+const API_BASE = "https://ecotrack-mqko.onrender.com";
+const API = `${API_BASE}/api`;
 
 export default function History() {
   const navigate = useNavigate();

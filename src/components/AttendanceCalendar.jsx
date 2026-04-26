@@ -2,7 +2,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import RightPanel from "./RightPanel";
 import "../styles/calender.css";
 
-const API = "https://ecotrack-mqko.onrender.com/api";
+const API_BASE = "https://ecotrack-mqko.onrender.com";
+const API = `${API_BASE}/api`;
+
 
 const months = [
   "January",

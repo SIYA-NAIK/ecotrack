@@ -7,7 +7,8 @@ import React, {
   useState,
 } from "react";
 
-const API = "https://ecotrack-mqko.onrender.com/api";
+const API_BASE = "https://ecotrack-mqko.onrender.com";
+const API = `${API_BASE}/api`;
 const POLL_MS = 15000;
 
 const ResidentDataContext = createContext(null);

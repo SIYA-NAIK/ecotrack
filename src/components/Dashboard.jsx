@@ -14,7 +14,8 @@ import {
 import "../styles/dashboard.css";
 import "../styles/styles.css";
 
-const API = "https://ecotrack-mqko.onrender.com/api";
+const API_BASE = "https://ecotrack-mqko.onrender.com";
+const API = `${API_BASE}/api`;
 
 const Dashboard = () => {
   const navigate = useNavigate();

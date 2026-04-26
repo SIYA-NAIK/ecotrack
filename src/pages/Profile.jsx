@@ -11,7 +11,8 @@ import {
   FaSave,
 } from "react-icons/fa";
 
-const BACKEND_URL = "https://ecotrack-mqko.onrender.com";
+const API_BASE = "https://ecotrack-mqko.onrender.com";
+const API = `${API_BASE}/api`;
 
 function safeParseUser(rawUser) {
   if (!rawUser) return null;

@@ -11,7 +11,8 @@ import {
 } from "react-icons/fa";
 import "./myreports.css";
 
-const BACKEND_URL = "https://ecotrack-mqko.onrender.com";
+const API_BASE = "https://ecotrack-mqko.onrender.com";
+const API = `${API_BASE}/api`;
 
 export default function MyReports() {
   const [reports, setReports] = useState([]);

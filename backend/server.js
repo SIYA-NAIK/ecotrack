@@ -4681,7 +4681,7 @@ app.post("/forgot-password", async (req, res) => {
       [resetToken, expiry, user.id]
     );
 
-    const resetLink = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+    const resetLink = `https://siya-naik.github.io/ecotrack/#/reset-password/${resetToken}`;
 
     await transporter.sendMail({
       from: `"EcoTrack" <${process.env.EMAIL_USER}>`,

@@ -165,6 +165,7 @@ const Login = () => {
 
             <input
               type="email"
+               autoComplete="new-email"
               placeholder="Email address"
               value={email}
               onChange={handleEmailChange}
@@ -181,6 +182,7 @@ const Login = () => {
 
             <input
               type="password"
+              autoComplete="new-password"
               placeholder="Password"
               value={password}
               onChange={handlePasswordChange}

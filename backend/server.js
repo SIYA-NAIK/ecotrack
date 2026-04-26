@@ -202,11 +202,18 @@ const SPECIAL_PICKUP_FEES = {
   "Garden Waste": 20,
 };
 
-function getSpecialPickupAmount(wasteType) {
+function getSpecialPickupAmount(wasteType, quantity = 1) {
   const normalizedType = String(wasteType || "").trim();
-  return Object.prototype.hasOwnProperty.call(SPECIAL_PICKUP_FEES, normalizedType)
+  const qty = Number(quantity) || 1;
+
+  const baseAmount = Object.prototype.hasOwnProperty.call(
+    SPECIAL_PICKUP_FEES,
+    normalizedType
+  )
     ? SPECIAL_PICKUP_FEES[normalizedType]
-    : null;
+    : 0;
+
+  return baseAmount * qty;
 }
 
 function assignedDriverNameSql(vehicleAlias = "v") {
@@ -3360,21 +3367,22 @@ app.get("/api/history/all", (req, res) => {
 ========================================================== */
 app.post("/api/pickups", async (req, res) => {
   const {
-    userId,
-    wasteType,
-    bulkyItem,
-    pickupDate,
-    preferredTime,
-    pickupAddress,
-    pickupLat,
-    pickupLng,
-    instructions,
-    paymentMethod,
-    paymentStatus,
-    paymentReference,
-    residentUpiId,
-    municipalityUpiId,
-  } = req.body;
+  userId,
+  wasteType,
+  bulkyItem,
+  quantity,
+  pickupDate,
+  preferredTime,
+  pickupAddress,
+  pickupLat,
+  pickupLng,
+  instructions,
+  paymentMethod,
+  paymentStatus,
+  paymentReference,
+  residentUpiId,
+  municipalityUpiId,
+} = req.body;
 
   if (!userId || !wasteType || !pickupDate || !preferredTime || !pickupAddress) {
     return res.status(400).json({ message: "Missing required fields" });
@@ -3384,8 +3392,8 @@ app.post("/api/pickups", async (req, res) => {
     return res.status(400).json({ message: "Payment method is required" });
   }
 
-  const safeAmount = getSpecialPickupAmount(wasteType);
-  if (safeAmount === null) {
+const safeQuantity = Number(quantity) || 1;
+const safeAmount = getSpecialPickupAmount(wasteType, safeQuantity);  if (safeAmount === null) {
     return res.status(400).json({ message: "Invalid pickup type" });
   }
 

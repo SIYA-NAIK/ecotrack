@@ -2291,74 +2291,7 @@ function generateTodayPickupsForAll(cb) {
   });
 }
         
-app.put("/api/areas/:id", (req, res) => {
-  const { id } = req.params;
-  const { area, pickup_time, truck_id, driver_name, status } = req.body;
 
-  if (!area || !pickup_time) {
-    return res.status(400).json({
-      message: "area and pickup_time are required",
-    });
-  }
-
-  const cleanArea = String(area).trim();
-  const cleanTime = String(pickup_time).trim();
-  const end_time = addMinutesToTimeHHMMSS(cleanTime, PICKUP_DURATION_MINUTES);
-
-  // 1. Update main area schedule
-  const updateAreaSql = `
-    UPDATE area_schedule
-    SET area = ?, pickup_time = ?, truck_id = ?, driver_name = ?, status = ?
-    WHERE id = ?
-  `;
-
-  db.query(
-    updateAreaSql,
-    [
-      cleanArea,
-      cleanTime,
-      truck_id || null,
-      driver_name || null,
-      status || "Active",
-      id,
-    ],
-    (err, result) => {
-      if (err) {
-        console.error("Update area error:", err);
-        return res.status(500).json({ message: "Database error" });
-      }
-
-      // 2. Update future scheduled pickups for this area
-      const updateCollectionsSql = `
-        UPDATE collections
-        SET start_time = ?, end_time = ?
-        WHERE LOWER(title) = LOWER(?)
-          AND LOWER(status) = 'scheduled'
-          AND due_date >= CURDATE()
-      `;
-
-      db.query(
-        updateCollectionsSql,
-        [cleanTime, end_time, `Garbage Pickup - ${cleanArea}`],
-        (err2, result2) => {
-          if (err2) {
-            console.error("Collections update error:", err2);
-            return res.status(500).json({
-              message: "Area updated but pickup update failed",
-            });
-          }
-
-          res.json({
-            ok: true,
-            message: "Area and future pickups updated successfully ✅",
-            affected_area_rows: result.affectedRows,
-            affected_pickup_rows: result2.affectedRows,
-          });
-        }
-      );
-    }
-  );
-});
 
 
 app.all("/api/pickups/generate-today/all", (req, res) => {

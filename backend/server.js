@@ -4409,7 +4409,7 @@ app.put("/api/areas/:id", (req, res) => {
     (err, result) => {
       if (err) {
         console.error("Update area error:", err);
-        return res.status(500).json({ message: "Database error" });
+        return res.status(500).json({ message: err.message });
       }
 
       const end_time = addMinutesToTimeHHMMSS(cleanTime, PICKUP_DURATION_MINUTES);

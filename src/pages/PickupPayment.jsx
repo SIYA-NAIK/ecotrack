@@ -89,21 +89,27 @@ export default function PickupPayment() {
     }
 
     const payload = {
-      userId,
-      wasteType: pickupData.wasteType || "",
-      bulkyItem: pickupData.bulkyItem || "",
-      pickupDate: pickupData.pickupDate || "",
-      preferredTime: pickupData.preferredTime || "",
-      pickupAddress: pickupData.pickupAddress || "",
-      pickupLat: pickupData.pickupLat || null,
-      pickupLng: pickupData.pickupLng || null,
-      instructions: pickupData.instructions || "",
-      paymentMethod: paymentMethodValue,
-      paymentStatus: paymentStatusValue,
-      paymentReference: paymentReferenceValue,
-      residentUpiId: null,
-      municipalityUpiId: null,
-    };
+  userId,
+  wasteType: pickupData.wasteType || "",
+  bulkyItem: pickupData.bulkyItem || "",
+  pickupDate: pickupData.pickupDate || "",
+  preferredTime: pickupData.preferredTime || "",
+  pickupAddress: pickupData.pickupAddress || "",
+  pickupLat: pickupData.pickupLat || null,
+  pickupLng: pickupData.pickupLng || null,
+  instructions: pickupData.instructions || "",
+  paymentMethod: paymentMethodValue,
+  paymentStatus: paymentStatusValue,
+  paymentReference: paymentReferenceValue,
+
+  // ✅ ADD THESE (IMPORTANT)
+  amount: price,
+  gst: gst,
+  total: total,
+
+  residentUpiId: null,
+  municipalityUpiId: null,
+};
 
     const res = await fetch(`${API_BASE}/api/pickups`, {
       method: "POST",

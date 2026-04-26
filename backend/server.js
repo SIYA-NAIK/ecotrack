@@ -3367,22 +3367,21 @@ app.get("/api/history/all", (req, res) => {
 ========================================================== */
 app.post("/api/pickups", async (req, res) => {
   const {
-  userId,
-  wasteType,
-  bulkyItem,
-  quantity,
-  pickupDate,
-  preferredTime,
-  pickupAddress,
-  pickupLat,
-  pickupLng,
-  instructions,
-  paymentMethod,
-  paymentStatus,
-  paymentReference,
-  residentUpiId,
-  municipalityUpiId,
-} = req.body;
+    userId,
+    wasteType,
+    bulkyItem,
+    pickupDate,
+    preferredTime,
+    pickupAddress,
+    pickupLat,
+    pickupLng,
+    instructions,
+    paymentMethod,
+    paymentStatus,
+    paymentReference,
+    residentUpiId,
+    municipalityUpiId,
+  } = req.body;
 
   if (!userId || !wasteType || !pickupDate || !preferredTime || !pickupAddress) {
     return res.status(400).json({ message: "Missing required fields" });
@@ -3392,13 +3391,22 @@ app.post("/api/pickups", async (req, res) => {
     return res.status(400).json({ message: "Payment method is required" });
   }
 
-const safeQuantity = Number(quantity) || 1;
-const safeAmount = getSpecialPickupAmount(wasteType, safeQuantity);  if (safeAmount === null) {
-    return res.status(400).json({ message: "Invalid pickup type" });
+  const safeAmount = Number(req.body.amount) || 0;
+  const safeGst = Number(req.body.gst) || Math.round(safeAmount * 0.18);
+  const safeTotal = Number(req.body.total) || safeAmount + safeGst;
+
+  if (safeAmount <= 0) {
+    return res.status(400).json({ message: "Invalid amount" });
   }
 
+  const methodValue = String(paymentMethod || "").toLowerCase();
+
   const safePaymentMethod =
-    String(paymentMethod).toLowerCase() === "upi" ? "upi" : "cash";
+    methodValue === "razorpay"
+      ? "razorpay"
+      : methodValue === "upi"
+      ? "upi"
+      : "cash";
 
   if (safePaymentMethod === "upi") {
     if (!residentUpiId || !String(residentUpiId).trim()) {
@@ -3412,14 +3420,13 @@ const safeAmount = getSpecialPickupAmount(wasteType, safeQuantity);  if (safeAmo
     }
   }
 
-  const safeGst = Math.round(safeAmount * 0.18);
-  const safeTotal = safeAmount + safeGst;
   const safePickupLat =
     pickupLat === "" || pickupLat === null || pickupLat === undefined
       ? null
       : Number.isFinite(Number(pickupLat))
       ? Number(pickupLat)
       : null;
+
   const safePickupLng =
     pickupLng === "" || pickupLng === null || pickupLng === undefined
       ? null
@@ -3429,7 +3436,11 @@ const safeAmount = getSpecialPickupAmount(wasteType, safeQuantity);  if (safeAmo
 
   const safePaymentStatus =
     paymentStatus ||
-    (safePaymentMethod === "upi" ? "verification_pending" : "pending_cash");
+    (safePaymentMethod === "razorpay"
+      ? "paid"
+      : safePaymentMethod === "upi"
+      ? "verification_pending"
+      : "pending_cash");
 
   const sql = `
     INSERT INTO pickup_requests
@@ -3465,8 +3476,8 @@ const safeAmount = getSpecialPickupAmount(wasteType, safeQuantity);  if (safeAmo
       pickupDate,
       preferredTime,
       pickupAddress,
-      Number.isFinite(safePickupLat) ? safePickupLat : null,
-      Number.isFinite(safePickupLng) ? safePickupLng : null,
+      safePickupLat,
+      safePickupLng,
       instructions || null,
       safeAmount,
       safeGst,
@@ -3492,12 +3503,15 @@ const safeAmount = getSpecialPickupAmount(wasteType, safeQuantity);  if (safeAmo
       let title = "Pickup Scheduled";
       let msg = `Your ${wasteType} pickup has been scheduled for ${pickupDate} at ${preferredTime}.`;
 
-      if (safePaymentMethod === "upi") {
+      if (safePaymentMethod === "razorpay") {
+        title = "Payment Successful";
+        msg = `Your ${wasteType} pickup has been scheduled for ${pickupDate} at ${preferredTime}. Payment of ₹${safeTotal} was completed successfully.`;
+      } else if (safePaymentMethod === "upi") {
         title = "Payment Submitted";
         msg = `Your ${wasteType} pickup has been scheduled for ${pickupDate} at ${preferredTime}. UPI payment is submitted for verification.`;
       } else {
         title = "Cash Pickup Confirmed";
-        msg = `Your ${wasteType} pickup has been scheduled for ${pickupDate} at ${preferredTime}. Cash payment will be collected during pickup.`;
+        msg = `Your ${wasteType} pickup has been scheduled for ${pickupDate} at ${preferredTime}. Cash payment of ₹${safeTotal} will be collected during pickup.`;
       }
 
       await createNotification(userId, title, msg, "pickup", {
@@ -3505,17 +3519,22 @@ const safeAmount = getSpecialPickupAmount(wasteType, safeQuantity);  if (safeAmo
         status: "scheduled",
         paymentMethod: safePaymentMethod,
         paymentStatus: safePaymentStatus,
+        amount: safeAmount,
+        gst: safeGst,
+        total: safeTotal,
       });
 
       return res.json({
         ok: true,
         message: "✅ Pickup scheduled successfully",
         id: pickupId,
+        amount: safeAmount,
+        gst: safeGst,
+        total: safeTotal,
       });
     }
   );
 });
-
 // ✅ upcoming pickups for resident
 app.get("/api/pickups/upcoming/:userId", (req, res) => {
   const userId = Number(req.params.userId);

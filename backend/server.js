@@ -742,6 +742,125 @@ function getDailyTrackerMetrics(pickup) {
   };
 }
 
+const TRACKER_CENTER = { lat: 15.3991, lng: 74.0124 };
+const TRACKER_SERVICE_LEAD_MINUTES = 30;
+
+function hashTrackerKey(value) {
+  return String(value || "default")
+    .split("")
+    .reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
+}
+
+function trackerAnchor(key, offset = 0) {
+  const hash = hashTrackerKey(key) + offset * 31;
+  const angle = (hash % 360) * (Math.PI / 180);
+  const radius = 0.018 + (hash % 12) * 0.0014;
+
+  return {
+    lat: TRACKER_CENTER.lat + Math.sin(angle) * radius,
+    lng: TRACKER_CENTER.lng + Math.cos(angle) * radius,
+  };
+}
+
+function minutesFromTime(timeStr) {
+  const raw = String(timeStr || "").trim();
+  const match = raw.match(/(\d{1,2})(?::(\d{2}))?(?::(\d{2}))?\s*(am|pm)?/i);
+  if (!match) return 7 * 60;
+
+  let hh = Number(match[1]);
+  const mm = Number(match[2] || 0);
+  const ss = Number(match[3] || 0);
+  const meridiem = String(match[4] || "").toLowerCase();
+
+  if (meridiem === "pm" && hh < 12) hh += 12;
+  if (meridiem === "am" && hh === 12) hh = 0;
+
+  return (hh || 0) * 60 + (mm || 0) + (ss || 0) / 60;
+}
+
+function getServerScheduledTruckPosition({
+  key,
+  startTime,
+  endTime,
+  pickupDate,
+  destLat,
+  destLng,
+}) {
+  const today = isoDateOnly(new Date());
+  const serviceDate = pickupDate || today;
+  const routeStart = trackerAnchor(key, 1);
+  const fallbackEnd = trackerAnchor(key, 2);
+  const routeEnd = {
+    lat: Number.isFinite(Number(destLat)) ? Number(destLat) : fallbackEnd.lat,
+    lng: Number.isFinite(Number(destLng)) ? Number(destLng) : fallbackEnd.lng,
+  };
+
+  if (serviceDate > today) {
+    return { ...routeStart, speed: 0, status: "Scheduled", progress: 5 };
+  }
+
+  if (serviceDate < today) {
+    return { ...routeEnd, speed: 0, status: "Completed", progress: 100 };
+  }
+
+  const now = new Date();
+  const currentMin =
+    now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+  const startMin = minutesFromTime(startTime);
+  const endMin = Math.max(minutesFromTime(endTime || startTime), startMin + 60);
+  const visibleStartMin = startMin - TRACKER_SERVICE_LEAD_MINUTES;
+  const routeTotal = Math.max(endMin - visibleStartMin, 1);
+  const progress = clamp((currentMin - visibleStartMin) / routeTotal, 0, 1);
+  const lat = routeStart.lat + (routeEnd.lat - routeStart.lat) * progress;
+  const lng = routeStart.lng + (routeEnd.lng - routeStart.lng) * progress;
+
+  if (currentMin < visibleStartMin) {
+    return { ...routeStart, speed: 0, status: "Scheduled", progress: 0 };
+  }
+
+  if (currentMin >= endMin) {
+    return { ...routeEnd, speed: 0, status: "Arrived", progress: 100 };
+  }
+
+  return {
+    lat,
+    lng,
+    speed: 18,
+    status: "Active",
+    progress: Math.round(progress * 100),
+  };
+}
+
+function applyScheduledPosition(truck, schedule = {}) {
+  if (!truck) return truck;
+
+  const scheduled = getServerScheduledTruckPosition({
+    key:
+      schedule.key ||
+      truck.truck_id ||
+      truck.vehicle_number ||
+      truck.zone ||
+      truck.area_assigned,
+    startTime: schedule.startTime,
+    endTime: schedule.endTime,
+    pickupDate: schedule.pickupDate,
+    destLat: schedule.destLat,
+    destLng: schedule.destLng,
+  });
+
+  return {
+    ...truck,
+    lat: scheduled.lat,
+    lng: scheduled.lng,
+    speed: scheduled.speed,
+    status:
+      String(truck.status || "").toLowerCase() === "maintenance"
+        ? truck.status
+        : scheduled.status,
+    schedule_progress: scheduled.progress,
+  };
+}
+
 function createNotification(
   userId,
   title,
@@ -1632,37 +1751,66 @@ app.get("/complaints", (req, res) => {
 /* =======================
    ✅ LIVE TRACKING
 ======================= */
-app.get("/live-tracking", (req, res) => {
+app.get("/live-tracking", async (req, res) => {
   const q = `
     SELECT
       v.id,
       v.vehicle_number AS truck_id,
       ${assignedDriverNameSql("v")} AS driver_name,
       v.area_assigned AS zone,
+      TIME_FORMAT(a.pickup_time, '%H:%i:%s') AS pickup_time,
       v.lat,
       v.lng,
       0 AS speed,
       v.status
     FROM vehicles v
+    LEFT JOIN area_schedule a
+      ON UPPER(TRIM(COALESCE(a.truck_id, ''))) = UPPER(TRIM(v.vehicle_number))
+      OR UPPER(TRIM(COALESCE(a.area, ''))) = UPPER(TRIM(COALESCE(v.area_assigned, '')))
     ORDER BY v.id ASC
   `;
 
-  db.query(q, (err, rows) => {
-    if (err) return res.status(500).json({ message: err.message });
-
+  try {
+    const [rows] = await db.promise().query(q);
     res.json(
-      (rows || []).map((r) => ({
-        id: r.id,
-        truck_id: r.truck_id,
-        driver_name: r.driver_name,
-        zone: r.zone,
-        lat: r.lat === null ? null : Number(r.lat),
-        lng: r.lng === null ? null : Number(r.lng),
-        speed: Number(r.speed || 0),
-        status: r.status,
-      }))
+      (rows || []).map((r) => {
+        const baseTruck = {
+          id: r.id,
+          truck_id: r.truck_id,
+          driver_name: r.driver_name,
+          zone: r.zone,
+          lat: r.lat === null ? null : Number(r.lat),
+          lng: r.lng === null ? null : Number(r.lng),
+          speed: Number(r.speed || 0),
+          status: r.status,
+        };
+        const fallbackPoint = trackerAnchor(r.truck_id || r.zone, 0);
+        const positioned = r.pickup_time
+          ? applyScheduledPosition(baseTruck, {
+              key: r.truck_id || r.zone,
+              startTime: r.pickup_time,
+              pickupDate: isoDateOnly(new Date()),
+            })
+          : {
+              ...baseTruck,
+              lat: Number.isFinite(baseTruck.lat)
+                ? baseTruck.lat
+                : fallbackPoint.lat,
+              lng: Number.isFinite(baseTruck.lng)
+                ? baseTruck.lng
+                : fallbackPoint.lng,
+            };
+
+        return {
+          ...positioned,
+          pickup_time: r.pickup_time || null,
+          lastUpdated: new Date().toISOString(),
+        };
+      })
     );
-  });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
 });
 
 app.post("/driver/update", (req, res) => {
@@ -2605,9 +2753,9 @@ app.get("/resident/live", async (req, res) => {
 
     if (specialPickup) {
       const desiredTruckId = String(specialPickup.assigned_truck_id || fallbackTruckId);
-      const truck = await findBestTruck(desiredTruckId, null);
+      const baseTruck = await findBestTruck(desiredTruckId, null);
 
-      if (!truck) {
+      if (!baseTruck) {
         return res.status(404).json({
           ok: false,
           message: "Truck not found",
@@ -2615,6 +2763,13 @@ app.get("/resident/live", async (req, res) => {
         });
       }
 
+      const truck = applyScheduledPosition(baseTruck, {
+        key: desiredTruckId,
+        startTime: specialPickup.preferred_time,
+        pickupDate: specialPickup.pickup_date,
+        destLat: specialPickup.pickup_lat,
+        destLng: specialPickup.pickup_lng,
+      });
       const tLat = Number(truck.lat);
       const tLng = Number(truck.lng);
       const pLat = Number(specialPickup.pickup_lat);
@@ -2627,8 +2782,10 @@ app.get("/resident/live", async (req, res) => {
         Number.isFinite(pLng);
 
       const distanceKm = hasCoords ? haversineKm(tLat, tLng, pLat, pLng) : null;
-      const speed = Math.max(Number(truck.speed || 25), 1);
-      const etaMin = distanceKm == null ? null : Math.ceil((distanceKm / speed) * 60);
+      const speed = Number.isFinite(Number(truck.speed)) ? Number(truck.speed) : 25;
+      const speedForEta = speed > 0 ? speed : 25;
+      const etaMin =
+        distanceKm == null ? null : Math.ceil((distanceKm / speedForEta) * 60);
       const progress =
         distanceKm == null ? 0 : clamp(Math.round((1 - distanceKm / 5) * 100), 0, 100);
 
@@ -2677,9 +2834,9 @@ app.get("/resident/live", async (req, res) => {
 
     const resident = residentRows[0] || {};
     const areaRaw = resident.area || (await getResidentArea(userId)) || null;
-    const truck = await findBestTruck(null, areaRaw);
+    const baseTruck = await findBestTruck(null, areaRaw);
 
-    if (!truck) {
+    if (!baseTruck) {
       return res.status(404).json({
         ok: false,
         message: "Truck not found",
@@ -2687,7 +2844,13 @@ app.get("/resident/live", async (req, res) => {
       });
     }
 
-    const speed = Math.max(Number(truck.speed || 18), 1);
+    const truck = applyScheduledPosition(baseTruck, {
+      key: areaRaw || baseTruck.truck_id,
+      startTime: nextDailyPickup.start_time,
+      endTime: nextDailyPickup.end_time,
+      pickupDate: nextDailyPickup.due_date,
+    });
+    const speed = Number.isFinite(Number(truck.speed)) ? Number(truck.speed) : 18;
     const { etaMin, progress } = getDailyTrackerMetrics(nextDailyPickup);
     const addressParts = [resident.house_no, resident.area, resident.city].filter(Boolean);
     const addressLabel =

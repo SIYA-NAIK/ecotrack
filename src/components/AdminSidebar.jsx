@@ -51,7 +51,7 @@ export default function AdminSidebar() {
           <span>Dashboard</span>
         </NavLink>
 
-        <NavLink to="/admin/users">User Management</NavLink>
+      
 
         <NavLink to="/admin/issues" className={linkClass}>
           <FiAlertTriangle className="aIco" />

@@ -1,263 +1,340 @@
-/* =========================================
-   PROFILE PAGE — DARK MODE + SMOOTH THEME SUPPORT
-========================================= */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
-.profile-page {
-  --brand: #2f8f62;
-  --brand-dark: #23724d;
-  --brand-weak: rgba(47, 143, 98, 0.12);
-
-  --bg: #f4f7f6;
-  --card: #ffffff;
-  --card-2: #f8fbfa;
-  --text: #0f172a;
-  --text-soft: #334155;
-  --muted: #64748b;
-
-  --border: rgba(15, 23, 42, 0.08);
-  --shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
-  --shadow-soft: 0 8px 22px rgba(2, 6, 23, 0.06);
-  --radius: 16px;
-
-  min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
+* {
+  box-sizing: border-box;
 }
 
-/* DARK MODE */
-html[data-theme="dark"] .profile-page {
-  --brand: #43b07a;
-  --brand-dark: #2f8f62;
-  --brand-weak: rgba(67, 176, 122, 0.16);
-
-  --bg: #0b1220;
-  --card: #0f1a2b;
-  --card-2: #0b1627;
-  --text: #e6edf6;
-  --text-soft: #cbd5e1;
-  --muted: #9aa8bd;
-
-  --border: rgba(226, 232, 240, 0.1);
-  --shadow: 0 18px 42px rgba(0, 0, 0, 0.42);
-  --shadow-soft: 0 10px 24px rgba(0, 0, 0, 0.28);
+body {
+  font-family: "Inter", "Poppins", sans-serif;
+  background: #f6faf8;
+  color: #172033;
 }
 
-/* ================= SMOOTH TRANSITION ================= */
-.profile-page,
-.profile-hero,
-.profile-pill,
-.profile-hero h1,
-.profile-hero p,
-.profile-wrap,
-.profile-card,
-.profile-card-head h3,
-.profile-field label,
-.profile-input input,
-.profile-primary,
-.upload-btn,
-.avatar-img,
-.avatar-fallback,
-.impact-card,
-.profile-footer {
-  transition:
-    background-color 0.32s ease,
-    color 0.32s ease,
-    border-color 0.32s ease,
-    box-shadow 0.32s ease,
-    transform 0.18s ease;
-}
-
-/* ================= HERO ================= */
 .profile-hero {
   text-align: center;
-  padding: 40px 20px 25px;
-  border-bottom: 1px solid var(--border);
-  background: transparent;
+  padding: 58px 20px 32px;
+  background: linear-gradient(180deg, #ffffff 0%, #f5faf7 100%);
+  border-bottom: 1px solid #e4ebe7;
 }
 
 .profile-pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  background: var(--brand-weak);
-  border: 1px solid rgba(47, 143, 98, 0.25);
-  padding: 6px 14px;
+  gap: 9px;
+  padding: 9px 18px;
   border-radius: 999px;
-  color: var(--brand-dark);
-  font-weight: 800;
-  margin-bottom: 16px;
+  background: #e8f5ef;
+  color: #158055;
+  border: 1px solid #b9dccd;
+  font-size: 14px;
+  font-weight: 700;
 }
 
-html[data-theme="dark"] .profile-pill {
-  color: var(--brand);
+.pill-dot {
+  width: 9px;
+  height: 9px;
+  background: #2f9467;
+  border-radius: 50%;
 }
 
 .profile-hero h1 {
-  font-size: 36px;
-  font-weight: 900;
-  margin: 0;
-  color: var(--text);
+  margin: 22px 0 10px;
+  font-size: 42px;
+  font-weight: 800;
+  color: #071b36;
 }
 
 .profile-hero p {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 15px;
+  margin: 0;
+  color: #5d6b82;
+  font-size: 16px;
 }
 
-/* ================= LAYOUT ================= */
 .profile-wrap {
-  max-width: 1200px;
+  max-width: 1340px;
   margin: 0 auto;
-  padding: 20px 16px 40px;
+  padding: 22px 24px 45px;
 }
 
 .profile-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 28px;
+  gap: 30px;
+  align-items: start;
 }
 
-/* ================= CARD ================= */
 .profile-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #e3e9e6;
+  border-radius: 22px;
+  padding: 26px;
+  box-shadow: 0 18px 45px rgba(24, 65, 45, 0.08);
 }
 
 .profile-card-head {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
+  gap: 14px;
+  margin-bottom: 24px;
 }
 
 .profile-card-ic {
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  background: var(--brand-weak);
-  color: var(--brand-dark);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #e8f3ed;
+  color: #21865c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
 }
 
 .profile-card-head h3 {
-  font-size: 14px;
-  font-weight: 900;
-  color: var(--text);
+  margin: 0;
+  font-size: 18px;
+  color: #061b34;
+  font-weight: 800;
 }
 
 .profile-card-sub {
-  font-size: 12px;
-  color: var(--muted);
+  margin: 4px 0 0;
+  color: #66758b;
+  font-size: 13px;
 }
 
-/* ================= FORM ================= */
+.profile-msg {
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-msg.success {
+  background: #e6f7ee;
+  color: #147a4f;
+  border: 1px solid #bfe8d3;
+}
+
+.profile-msg.error {
+  background: #ffecec;
+  color: #b3261e;
+  border: 1px solid #ffc7c7;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .profile-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 22px;
 }
 
 .profile-field label {
-  font-size: 12px;
-  font-weight: 900;
-  color: var(--text);
+  display: block;
+  margin-bottom: 8px;
+  color: #0c1f35;
+  font-size: 14px;
+  font-weight: 700;
 }
 
-.profile-input input {
+.profile-input {
+  position: relative;
+}
+
+.profile-input input,
+.profile-input select {
   width: 100%;
-  height: 40px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  padding: 0 40px 0 12px;
-  background: var(--card);
-  color: var(--text);
+  height: 48px;
+  border: 1px solid #dbe3df;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 0 14px 0 44px;
+  font-size: 14px;
+  color: #152237;
+  outline: none;
+  transition: 0.2s ease;
 }
 
-.profile-input input:focus {
-  border-color: rgba(47, 143, 98, 0.45);
-  box-shadow: 0 0 0 3px rgba(47, 143, 98, 0.10);
+.profile-input input:focus,
+.profile-input select:focus {
+  border-color: #2f9467;
+  box-shadow: 0 0 0 4px rgba(47, 148, 103, 0.12);
 }
 
-/* ================= BUTTON ================= */
+.profile-input input:disabled,
+.profile-input select:disabled {
+  background: #f3f5f4;
+  cursor: not-allowed;
+}
+
+.profile-ic {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #2f9467;
+  font-size: 15px;
+  z-index: 2;
+}
+
 .profile-primary {
   width: 100%;
-  height: 42px;
-  border-radius: 12px;
-  background: var(--brand);
-  color: #fff;
-  font-weight: 900;
+  height: 52px;
+  border: none;
+  border-radius: 15px;
+  background: #2f9467;
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  transition: 0.2s ease;
+  box-shadow: 0 10px 22px rgba(47, 148, 103, 0.25);
 }
 
 .profile-primary:hover {
-  background: var(--brand-dark);
+  background: #257b55;
+  transform: translateY(-1px);
 }
 
-/* ================= AVATAR ================= */
+.profile-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.profile-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.photo-card {
+  text-align: left;
+}
+
+.avatar-box {
+  text-align: center;
+}
+
 .avatar-img,
 .avatar-fallback {
-  width: 120px;
-  height: 120px;
-  border-radius: 18px;
-  border: 1px solid var(--border);
-  background: var(--brand-weak);
+  width: 118px;
+  height: 118px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #e8f3ed;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  margin-bottom: 16px;
 }
 
 .avatar-fallback {
-  display: grid;
-  place-items: center;
+  background: #2f9467;
+  color: white;
   font-size: 42px;
-  font-weight: 900;
-  color: var(--brand-dark);
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* ================= UPLOAD ================= */
-.upload-btn {
-  width: 100%;
-  height: 40px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--text);
+.upload-btn,
+.verify-btn {
+  border: none;
+  border-radius: 13px;
+  background: #eef7f2;
+  color: #1f7d56;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 800;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.2s ease;
 }
 
-.upload-btn:hover {
-  background: var(--brand-weak);
+.upload-btn:hover,
+.verify-btn:hover {
+  background: #dff1e8;
 }
 
-/* ================= IMPACT ================= */
+.avatar-hint {
+  color: #67758a;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 14px auto 0;
+  max-width: 280px;
+}
+
 .impact-card {
-  background: linear-gradient(135deg, var(--brand), var(--brand-dark));
-  color: #fff;
-  padding: 24px;
-  border-radius: var(--radius);
+  background: linear-gradient(135deg, #2f9467, #237a53);
+  border-radius: 22px;
+  padding: 26px;
+  color: white;
+  box-shadow: 0 18px 45px rgba(35, 122, 83, 0.22);
 }
 
-/* ================= FOOTER ================= */
+.impact-card h3 {
+  margin: 0 0 18px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.impact-stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.status-box {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.status-box p {
+  margin: 0 0 6px;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 800;
+  opacity: 0.9;
+}
+
+.status-box h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.verify-btn {
+  width: 100%;
+  margin-top: 18px;
+  background: #ffffff;
+  color: #1d6d4c;
+}
+
+.verify-btn:hover {
+  background: #f1f7f4;
+}
+
 .profile-footer {
   text-align: center;
-  color: var(--muted);
-  font-size: 11px;
+  color: #6f7c91;
+  font-size: 12px;
+  margin-top: 8px;
 }
 
-/* ================= DARK FIX ================= */
-html[data-theme="dark"] body,
-html[data-theme="dark"] #root {
-  background: #0b1220 !important;
-}
-
-html[data-theme="dark"] .profile-card {
-  background: linear-gradient(180deg, #0b1627 0%, #0a1423 100%);
-}
-
-/* ================= RESPONSIVE ================= */
 @media (max-width: 950px) {
   .profile-grid {
     grid-template-columns: 1fr;
@@ -265,5 +342,9 @@ html[data-theme="dark"] .profile-card {
 
   .profile-row {
     grid-template-columns: 1fr;
+  }
+
+  .profile-hero h1 {
+    font-size: 34px;
   }
 }

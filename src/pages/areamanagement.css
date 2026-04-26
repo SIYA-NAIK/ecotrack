@@ -85,6 +85,8 @@
   background: #146c30;
 }
 
+/* ---------- TABLE FIX ---------- */
+
 .area-table-card {
   overflow-x: auto;
 }
@@ -93,40 +95,85 @@
   width: 100%;
   border-collapse: collapse;
   background: white;
-  min-width: 900px;
+  min-width: 1100px; /* increased to prevent squeeze */
+  table-layout: fixed; /* prevents overlap */
 }
 
 .area-table thead {
   background: #f3f4f6;
 }
 
-.area-table th {
-  text-align: left;
+.area-table th,
+.area-table td {
   padding: 14px 16px;
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.area-table th {
   font-size: 13px;
   color: #374151;
   font-weight: 700;
-  white-space: nowrap;
 }
 
 .area-table td {
-  padding: 14px 16px;
   font-size: 14px;
   border-top: 1px solid #e5e7eb;
   color: #111827;
   font-weight: 500;
-  vertical-align: middle;
+}
+
+/* Proper column widths */
+.area-table th:nth-child(1),
+.area-table td:nth-child(1) {
+  width: 14%;
+}
+
+.area-table th:nth-child(2),
+.area-table td:nth-child(2) {
+  width: 12%;
+}
+
+.area-table th:nth-child(3),
+.area-table td:nth-child(3) {
+  width: 12%;
+}
+
+.area-table th:nth-child(4),
+.area-table td:nth-child(4) {
+  width: 12%;
+}
+
+.area-table th:nth-child(5),
+.area-table td:nth-child(5) {
+  width: 12%;
+}
+
+.area-table th:nth-child(6),
+.area-table td:nth-child(6) {
+  width: 16%;
+}
+
+.area-table th:nth-child(7),
+.area-table td:nth-child(7) {
+  width: 10%;
+}
+
+.area-table th:nth-child(8),
+.area-table td:nth-child(8) {
+  width: 12%;
+  min-width: 140px;
+  overflow: visible;
 }
 
 .area-table tr:hover {
   background: #f9fafb;
 }
 
-.area-table th:last-child,
-.area-table td:last-child {
-  width: 180px;
-  min-width: 180px;
-}
+/* ---------- STATUS ---------- */
 
 .area-status {
   display: inline-block;
@@ -147,6 +194,8 @@
   color: #c23535;
 }
 
+/* ---------- ACTION BUTTONS ---------- */
+
 .area-action-buttons {
   display: flex;
   gap: 8px;
@@ -157,6 +206,7 @@
 
 .edit-btn,
 .delete-btn {
+  min-width: 60px;
   border: none;
   padding: 8px 12px;
   border-radius: 8px;
@@ -184,6 +234,8 @@
   background: #b91c1c;
 }
 
+/* ---------- EDIT ---------- */
+
 .area-edit-actions {
   margin-top: 12px;
   display: flex;
@@ -210,6 +262,8 @@
   color: #6b7280;
 }
 
+/* ---------- RESPONSIVE ---------- */
+
 @media (max-width: 1200px) {
   .area-form {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -226,6 +280,6 @@
   }
 
   .area-table {
-    min-width: 900px;
+    min-width: 1100px;
   }
 }

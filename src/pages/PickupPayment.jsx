@@ -13,11 +13,6 @@ import "./pickuppayment.css";
 const API_BASE = "https://ecotrack-mqko.onrender.com";
 const API = `${API_BASE}/api`;
 
-const PICKUP_FEES = {
-  "Bulky Items": 500,
-  "E-Waste": 300,
-  "Garden Waste": 200,
-};
 
 export default function PickupPayment() {
   const navigate = useNavigate();
@@ -33,11 +28,8 @@ export default function PickupPayment() {
   const [successReference, setSuccessReference] = useState("");
 
   const price = useMemo(() => {
-    const mappedFee = PICKUP_FEES[pickupData.wasteType];
-    return Number.isFinite(mappedFee)
-      ? mappedFee
-      : Number(pickupData.amount || 0);
-  }, [pickupData.amount, pickupData.wasteType]);
+  return Number(pickupData.amount || 0);
+}, [pickupData.amount]);
 
   const gst = useMemo(() => Math.round(price * 0.18), [price]);
   const total = useMemo(() => price + gst, [price, gst]);

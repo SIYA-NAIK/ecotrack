@@ -1513,7 +1513,7 @@ app.get("/api/dashboard/recent", (req, res) => {
         v.vehicle_number,
         ${assignedDriverNameSql("v")} AS driver_name,
         v.area_assigned,
-        v.speed,
+       0 AS speed,
         v.status
      FROM vehicles v
      ORDER BY v.id DESC
@@ -1574,7 +1574,7 @@ app.get("/api/dashboard/fleet-monitor", (req, res) => {
       SUM(LOWER(status)='active') AS active,
       SUM(LOWER(status)='maintenance') AS maintenance,
       SUM(LOWER(status)='inactive') AS inactive,
-      ROUND(AVG(COALESCE(speed,0)), 1) AS avg_speed
+      0 AS avg_speed
     FROM vehicles
   `;
 
@@ -1587,7 +1587,7 @@ app.get("/api/dashboard/fleet-monitor", (req, res) => {
       v.status,
       v.lat,
       v.lng,
-      v.speed
+     0 AS speed
     FROM vehicles v
     ORDER BY v.id DESC
     LIMIT 10
@@ -1641,7 +1641,7 @@ app.get("/live-tracking", (req, res) => {
       v.area_assigned AS zone,
       v.lat,
       v.lng,
-      v.speed,
+      0 AS speed,
       v.status
     FROM vehicles v
     ORDER BY v.id ASC
@@ -1990,7 +1990,7 @@ app.get("/vehicles", (req, res) => {
        v.status,
        v.lat,
        v.lng,
-       v.speed
+       0 AS speed
      FROM vehicles v
      ORDER BY v.id ASC`,
     (err, rows) => {
@@ -2265,7 +2265,7 @@ app.get("/api/tracking/live", (req, res) => {
       v.area_assigned,
       v.lat,
       v.lng,
-      v.speed,
+      0 AS speed,
       v.status
     FROM vehicles v
   `;
@@ -2513,7 +2513,7 @@ app.get("/resident/live", async (req, res) => {
       v.area_assigned AS zone,
       v.lat,
       v.lng,
-      v.speed,
+    0 AS speed,
       v.status
     FROM vehicles v
   `;
@@ -3491,7 +3491,7 @@ app.post("/api/admin/pickups/:pickupId/assign-truck", (req, res) => {
         ${assignedDriverNameSql("v")} AS driver_name,
         v.lat,
         v.lng,
-        v.speed
+        0 AS speed
       FROM vehicles v
       WHERE v.vehicle_number = ?
       LIMIT 1

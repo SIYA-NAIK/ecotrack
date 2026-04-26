@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ecotrack/static/css/main.ac0b088c.css",
-    "main.js": "/ecotrack/static/js/main.0a75eb18.js",
+    "main.js": "/ecotrack/static/js/main.702c1aae.js",
     "static/media/hero.png": "/ecotrack/static/media/hero.07e692695b6943978a5e.png",
     "static/media/plant.jpg": "/ecotrack/static/media/plant.1f76d76c578d3a7e5215.jpg",
     "static/media/bg.jpg": "/ecotrack/static/media/bg.d3153229ac25a93246d8.jpg",
@@ -15,10 +15,10 @@
     "static/media/trackstatus.png": "/ecotrack/static/media/trackstatus.bba9c543cf1d46d76a41.png",
     "index.html": "/ecotrack/index.html",
     "main.ac0b088c.css.map": "/ecotrack/static/css/main.ac0b088c.css.map",
-    "main.0a75eb18.js.map": "/ecotrack/static/js/main.0a75eb18.js.map"
+    "main.702c1aae.js.map": "/ecotrack/static/js/main.702c1aae.js.map"
   },
   "entrypoints": [
     "static/css/main.ac0b088c.css",
-    "static/js/main.0a75eb18.js"
+    "static/js/main.702c1aae.js"
   ]
 }

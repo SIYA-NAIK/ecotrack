@@ -115,7 +115,7 @@ export default function SchedulePickup() {
 
   const bulkyItems = useMemo(
     () => [
-      { label: "Sofa", fee: 700 },
+      { label: "Sofa", fee: 1 },
       { label: "Bed", fee: 900 },
       { label: "Mattress", fee: 500 },
       { label: "Table", fee: 600 },

@@ -28,7 +28,7 @@ export default function MyReports() {
       return;
     }
 
-    fetch(`${API}/api/complaints/user/${userId}`)
+    fetch(`${API}/complaints/user/${userId}`)
       .then((res) => res.json())
       .then((data) => {
         setReports(Array.isArray(data) ? data : []);

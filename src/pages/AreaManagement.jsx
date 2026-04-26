@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./areamanagement.css";
 
 const API = "https://ecotrack-mqko.onrender.com/api";
+
 const initialForm = {
   area: "",
+  city: "",
+  state: "",
   pickup_time: "",
   truck_id: "",
   driver_name: "",
@@ -38,21 +41,18 @@ function normalizeTimeForApi(time) {
 
 function formatTimeForDisplay(time) {
   if (!time) return "--";
+
   const value = String(time).trim();
+  const [hourStr, minuteStr] = value.split(":");
 
-  try {
-    const [hourStr, minuteStr] = value.split(":");
-    let hour = Number(hourStr);
-    const minute = minuteStr || "00";
-    const ampm = hour >= 12 ? "PM" : "AM";
+  let hour = Number(hourStr);
+  const minute = minuteStr || "00";
+  const ampm = hour >= 12 ? "PM" : "AM";
 
-    hour = hour % 12;
-    if (hour === 0) hour = 12;
+  hour = hour % 12;
+  if (hour === 0) hour = 12;
 
-    return `${hour}:${minute} ${ampm}`;
-  } catch {
-    return value;
-  }
+  return `${hour}:${minute} ${ampm}`;
 }
 
 export default function AreaManagement() {
@@ -81,6 +81,7 @@ export default function AreaManagement() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setForm((prev) => ({
       ...prev,
       [name]: value,
@@ -92,19 +93,27 @@ export default function AreaManagement() {
     setEditingId(null);
   };
 
- const validateForm = () => {
-  if (!form.area.trim() || !form.pickup_time.trim()) {
-    alert("Area name and pickup time are required.");
-    return false;
-  }
-  return true;
-};
+  const validateForm = () => {
+    if (
+      !form.area.trim() ||
+      !form.city.trim() ||
+      !form.state.trim() ||
+      !form.pickup_time.trim()
+    ) {
+      alert("Area, city, state and pickup time are required.");
+      return false;
+    }
+
+    return true;
+  };
 
   const handleSubmit = async () => {
     if (!validateForm()) return;
 
     const payload = {
       area: form.area.trim(),
+      city: form.city.trim(),
+      state: form.state.trim(),
       pickup_time: normalizeTimeForApi(form.pickup_time),
       truck_id: form.truck_id.trim(),
       driver_name: form.driver_name.trim(),
@@ -112,21 +121,17 @@ export default function AreaManagement() {
     };
 
     try {
-      let res;
-
-      if (editingId) {
-        res = await fetch(`${API}/areas/${editingId}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-      } else {
-        res = await fetch(`${API}/areas`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-      }
+      const res = editingId
+        ? await fetch(`${API}/areas/${editingId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          })
+        : await fetch(`${API}/areas`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
 
       const data = await res.json();
 
@@ -145,8 +150,11 @@ export default function AreaManagement() {
 
   const handleEdit = (areaItem) => {
     setEditingId(areaItem.id);
+
     setForm({
       area: areaItem.area || areaItem.area_name || "",
+      city: areaItem.city || "",
+      state: areaItem.state || "",
       pickup_time: normalizeTimeForInput(areaItem.pickup_time),
       truck_id: areaItem.truck_id || "",
       driver_name: areaItem.driver_name || "",
@@ -203,6 +211,20 @@ export default function AreaManagement() {
           />
 
           <input
+            name="city"
+            placeholder="City"
+            value={form.city}
+            onChange={handleChange}
+          />
+
+          <input
+            name="state"
+            placeholder="State"
+            value={form.state}
+            onChange={handleChange}
+          />
+
+          <input
             type="time"
             name="pickup_time"
             value={form.pickup_time}
@@ -223,23 +245,19 @@ export default function AreaManagement() {
             onChange={handleChange}
           />
 
-          <select
-            name="status"
-            value={form.status}
-            onChange={handleChange}
-          >
+          <select name="status" value={form.status} onChange={handleChange}>
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
           </select>
 
-          <button onClick={handleSubmit}>
+          <button type="button" onClick={handleSubmit}>
             {editingId ? "Update Area" : "Add Area"}
           </button>
         </div>
 
         {editingId ? (
           <div className="area-edit-actions">
-            <button className="cancel-edit-btn" onClick={resetForm}>
+            <button type="button" className="cancel-edit-btn" onClick={resetForm}>
               Cancel Edit
             </button>
           </div>
@@ -256,6 +274,8 @@ export default function AreaManagement() {
             <thead>
               <tr>
                 <th>Area</th>
+                <th>City</th>
+                <th>State</th>
                 <th>Pickup Time</th>
                 <th>Truck</th>
                 <th>Driver</th>
@@ -268,29 +288,34 @@ export default function AreaManagement() {
               {areas.map((areaItem) => (
                 <tr key={areaItem.id}>
                   <td>{areaItem.area || areaItem.area_name}</td>
+                  <td>{areaItem.city || "--"}</td>
+                  <td>{areaItem.state || "--"}</td>
                   <td>{formatTimeForDisplay(areaItem.pickup_time)}</td>
                   <td>{areaItem.truck_id || "--"}</td>
                   <td>{areaItem.driver_name || "--"}</td>
                   <td>
                     <span
                       className={`area-status ${
-                        String(areaItem.status).toLowerCase() === "active"
+                        String(areaItem.status || "").toLowerCase() === "active"
                           ? "active"
                           : "inactive"
                       }`}
                     >
-                      {areaItem.status}
+                      {areaItem.status || "Active"}
                     </span>
                   </td>
                   <td>
                     <div className="area-action-buttons">
                       <button
+                        type="button"
                         className="edit-btn"
                         onClick={() => handleEdit(areaItem)}
                       >
                         Edit
                       </button>
+
                       <button
+                        type="button"
                         className="delete-btn"
                         onClick={() => handleDelete(areaItem.id)}
                       >

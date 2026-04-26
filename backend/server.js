@@ -2135,7 +2135,7 @@ app.delete("/schedules/:id", (req, res) => {
 /* =======================
    ✅ VEHICLES
 ======================= */
-app.get("/vehicles", (req, res) => {
+app.get("/api/vehicles", (req, res) => {
   db.query(
     `SELECT
        v.id,

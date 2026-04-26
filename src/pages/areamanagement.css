@@ -283,3 +283,19 @@
     min-width: 1100px;
   }
 }
+
+/* FIX: stop vertical text breaking */
+.area-table td {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+/* specifically fix driver column */
+.area-table td:nth-child(6) {
+  white-space: nowrap;
+}
+
+/* fix action column */
+.area-table td:nth-child(8) {
+  white-space: nowrap;
+}
